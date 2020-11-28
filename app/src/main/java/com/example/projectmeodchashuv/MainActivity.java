@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lv.setAdapter(adapter);
         btnadd.setOnClickListener(this);
         lv.setOnItemClickListener(this);
-
+        //bdika
     }
 
 
