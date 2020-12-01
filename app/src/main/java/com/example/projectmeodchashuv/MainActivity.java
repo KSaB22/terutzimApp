@@ -42,6 +42,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnadd.setOnClickListener(this);
         lv.setOnItemClickListener(this);
         //bdika
+        Intent intent = new Intent(this, NotificationsService.class);
+        startService(intent);
     }
 
 
@@ -66,7 +68,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             DataModel.teruzims.add(teruz);
             DataModel.save();
 
+
             adapter.notifyDataSetChanged();
         }
+
     }
 }

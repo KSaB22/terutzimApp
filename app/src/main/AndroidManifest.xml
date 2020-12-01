@@ -9,7 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewingActivity"></activity>
+        <service
+            android:name=".NotificationsService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".ViewingActivity" />
         <activity android:name=".LoadingActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddingActivity" />
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

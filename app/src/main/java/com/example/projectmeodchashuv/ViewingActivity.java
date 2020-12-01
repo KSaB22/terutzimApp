@@ -26,7 +26,7 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).addupvote();
+        DataModel.teruzims.get(getIntent().getIntExtra("PLACE", 0)).addUpvote(getIntent().getIntExtra("PLACE", 0));
         DataModel.save();
         up.setText(DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getUpvote() + "upvote(s)");
         finish();
