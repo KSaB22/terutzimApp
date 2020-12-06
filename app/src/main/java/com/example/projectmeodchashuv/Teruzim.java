@@ -6,11 +6,11 @@ class Teruzim {
     private String tluna;
     private int upvotes;
 
-    public Teruzim(String creator, String reason, String tluna) {
+    public Teruzim(String creator, String reason, String tluna, int upvotes) {
         this.creator = creator;
         this.reason = reason;
         this.tluna = tluna;
-
+        this.upvotes = upvotes;
     }
 
     public Teruzim() {
@@ -52,8 +52,4 @@ class Teruzim {
         this.upvotes = DataModel.teruzims.get(place).getUpvote()+ 1;
     }
 
-    @Override
-    public String toString() {
-        return "למטרת " + this.reason + "   " + this.upvotes + " upvotes";
-    }
 }

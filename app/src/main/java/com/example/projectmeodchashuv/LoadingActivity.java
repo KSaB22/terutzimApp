@@ -38,6 +38,7 @@ public class LoadingActivity extends AppCompatActivity {
                 DataModel.teruzims.clear();
                 DataModel.teruzims.addAll(fbTeruzim);
 
+
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivityForResult(intent, 0);
             }

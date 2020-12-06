@@ -22,7 +22,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class NotificationsService extends Service {
+public class
+NotificationsService extends Service {
     public NotificationsService() {
     }
     boolean first = true;
@@ -30,8 +31,9 @@ public class NotificationsService extends Service {
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        throw new UnsupportedOperationException("Not yet implemented");
     }
+
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -40,6 +42,7 @@ public class NotificationsService extends Service {
 
         dbRef.addValueEventListener(new ValueEventListener() {
             @Override
+
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
@@ -90,4 +93,5 @@ public class NotificationsService extends Service {
 
         return super.onStartCommand(intent, flags, startId);
     }
+
 }

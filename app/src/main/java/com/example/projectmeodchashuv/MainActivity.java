@@ -25,25 +25,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Button btnadd;
     ListView lv;
-    ArrayAdapter<Teruzim> adapter;
+    MyListAdapter adapter;
     //ArrayList<Teruzim> teruzims;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("teruzim");
+    public static ArrayList<String> maintitle = new ArrayList<String>();
+    public static ArrayList<String> subtitle = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        maintitle = new ArrayList<String>();
+        subtitle = new ArrayList<String>();
+        for (int i = 0; i < DataModel.teruzims.size(); i++){
+            maintitle.add("לשימוש " + DataModel.teruzims.get(i).getReason());
+            subtitle.add(DataModel.teruzims.get(i).getUpvote() + " העלאות חיוביות");
+        }
+        adapter=new MyListAdapter(this, maintitle, subtitle);
 
         btnadd = findViewById(R.id.btnadd);
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, DataModel.teruzims);
         lv = findViewById(R.id.lv);
         lv.setAdapter(adapter);
         btnadd.setOnClickListener(this);
         lv.setOnItemClickListener(this);
         //bdika
+        /*
         Intent intent = new Intent(this, NotificationsService.class);
-        startService(intent);
+        startService(intent);*/
     }
 
 
@@ -64,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK)
         {
-            Teruzim teruz = new Teruzim(data.getStringExtra("REASON"),data.getStringExtra("TERUZ"),data.getStringExtra("CREATOR"));
+            Teruzim teruz = new Teruzim(data.getStringExtra("REASON"),data.getStringExtra("TERUZ"),data.getStringExtra("CREATOR"), 0);
             DataModel.teruzims.add(teruz);
             DataModel.save();
 
