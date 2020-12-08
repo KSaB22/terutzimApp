@@ -35,7 +35,11 @@ public class LoadingActivity extends AppCompatActivity {
                 // whenever data at this location is updated.
                 GenericTypeIndicator<ArrayList<Teruzim>> t = new GenericTypeIndicator<ArrayList<Teruzim>>() {};
                 ArrayList<Teruzim> fbTeruzim = dataSnapshot.getValue(t);
+                //GenericTypeIndicator<String> t = new GenericTypeIndicator<String>() {};
+                //String kaki = dataSnapshot.getValue(t);
+                //String kaki2 = kaki;
                 DataModel.teruzims.clear();
+
                 DataModel.teruzims.addAll(fbTeruzim);
 
 

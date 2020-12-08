@@ -1,21 +1,21 @@
 package com.example.projectmeodchashuv;
 
 class Teruzim {
-    private String creator;
     private String reason;
+    private String creator;
     private String tluna;
     private int upvotes;
 
     public Teruzim(String creator, String reason, String tluna, int upvotes) {
-        this.creator = creator;
         this.reason = reason;
+        this.creator = creator;
         this.tluna = tluna;
         this.upvotes = upvotes;
     }
 
     public Teruzim() {
-        this.creator = "mmmmm";
         this.reason = "000000";
+        this.creator = "mmmmm";
         this.tluna = "000000000";
 
     }
@@ -32,8 +32,12 @@ class Teruzim {
         return tluna;
     }
 
-    public int getUpvote() {
+    public int getUpvotes() {
         return upvotes;
+    }
+
+    public void setUpvotes(int upvotes) {
+        this.upvotes = upvotes;
     }
 
     public void setCreator(String creator) {
@@ -49,7 +53,7 @@ class Teruzim {
     }
 
     public void addUpvote(int place) {
-        this.upvotes = DataModel.teruzims.get(place).getUpvote()+ 1;
+        this.upvotes = DataModel.teruzims.get(place).getUpvotes()+ 1;
     }
 
 }

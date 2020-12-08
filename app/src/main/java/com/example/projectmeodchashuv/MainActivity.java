@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         subtitle = new ArrayList<String>();
         for (int i = 0; i < DataModel.teruzims.size(); i++){
             maintitle.add("לשימוש " + DataModel.teruzims.get(i).getReason());
-            subtitle.add(DataModel.teruzims.get(i).getUpvote() + " העלאות חיוביות");
+            subtitle.add(DataModel.teruzims.get(i).getUpvotes() + " העלאות חיוביות");
         }
         adapter=new MyListAdapter(this, maintitle, subtitle);
 

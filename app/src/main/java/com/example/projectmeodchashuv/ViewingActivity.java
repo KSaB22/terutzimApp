@@ -21,7 +21,7 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
         btn.setOnClickListener(this);
         tluna.setText(DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getTluna());
         cr.setText(  "נוצר על ידי " + DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getCreator());
-        up.setText(DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getUpvote() + "upvote(s)");
+        up.setText(DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getUpvotes() + "upvote(s)");
     }
 
     @Override
@@ -31,9 +31,9 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
         DataModel.save();
         for (int i = 0; i < DataModel.teruzims.size(); i++){
             MainActivity.maintitle.set(i,"לשימוש " + DataModel.teruzims.get(i).getReason());
-            MainActivity.subtitle.set(i,DataModel.teruzims.get(i).getUpvote() + " העלאות חיוביות");
+            MainActivity.subtitle.set(i,DataModel.teruzims.get(i).getUpvotes() + " העלאות חיוביות");
         }
-        up.setText(DataModel.teruzims.get(j).getUpvote() + "upvote(s)");
+        up.setText(DataModel.teruzims.get(j).getUpvotes() + "upvote(s)");
         finish();
     }
 }
