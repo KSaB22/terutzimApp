@@ -28,7 +28,7 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         int j = getIntent().getIntExtra("PLACE", 0);
         DataModel.teruzims.get(j).addUpvote(j);
-        DataModel.save();
+        DataModel.saveTeruzim();
         for (int i = 0; i < DataModel.teruzims.size(); i++){
             MainActivity.maintitle.set(i,"לשימוש " + DataModel.teruzims.get(i).getReason());
             MainActivity.subtitle.set(i,DataModel.teruzims.get(i).getUpvotes() + " העלאות חיוביות");

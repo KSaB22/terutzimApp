@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {
             Teruzim teruz = new Teruzim(data.getStringExtra("REASON"),data.getStringExtra("TERUZ"),data.getStringExtra("CREATOR"), 0);
             DataModel.teruzims.add(teruz);
-            DataModel.save();
+            DataModel.saveTeruzim();
 
 
             adapter.notifyDataSetChanged();

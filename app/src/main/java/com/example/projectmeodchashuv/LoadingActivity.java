@@ -1,5 +1,6 @@
 package com.example.projectmeodchashuv;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -18,7 +19,8 @@ import java.util.ArrayList;
 public class LoadingActivity extends AppCompatActivity {
 
     FirebaseDatabase database;
-    DatabaseReference dbRef;
+    DatabaseReference dbteruzRef;
+    DatabaseReference dbuserRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +28,9 @@ public class LoadingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_loading);
 
         database = FirebaseDatabase.getInstance();
-        dbRef = database.getReference("teruzim");
-
-        dbRef.addValueEventListener(new ValueEventListener() {
+        dbteruzRef = database.getReference("teruzim");
+        dbuserRef = database.getReference("users");
+        dbteruzRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
@@ -43,16 +45,30 @@ public class LoadingActivity extends AppCompatActivity {
                 DataModel.teruzims.addAll(fbTeruzim);
 
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivityForResult(intent, 0);
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
 
             }
-        }); 
+        });
+        dbuserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                GenericTypeIndicator<ArrayList<User>> t = new GenericTypeIndicator<ArrayList<User>>() {};
+                ArrayList<User> fbUsers = snapshot.getValue(t);
+                DataModel.users.clear();
+                DataModel.users.addAll(fbUsers);
+                //*************************************************************************************************************************************
+                //                                              יא מפגר שים אינטנט
+                // ************************************************************************************************************************************
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 }
