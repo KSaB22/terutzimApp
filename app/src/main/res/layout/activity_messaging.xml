@@ -4,22 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".MessagingActivity"
     android:orientation="vertical"
     android:background="?attr/backgroundColor">
+    <Button
+        android:id="@+id/btpick_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Pick number from contacts list"
+        android:layout_gravity="center"
+        />
 
+    <EditText
+        android:id="@+id/msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="message"
+        />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add"
-        android:id="@+id/btnadd"
-        android:textSize="30dp"/>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/lv"
-        android:textColor="?attr/subtitleTextColor"
-        />
+        android:text="Send"
+        android:id="@+id/snd"
+        android:onClick="onSend"/>
 
 
 </LinearLayout>

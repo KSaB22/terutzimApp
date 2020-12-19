@@ -6,7 +6,7 @@ class Teruzim {
     private String tluna;
     private int upvotes;
 
-    public Teruzim(String creator, String reason, String tluna, int upvotes) {
+    public Teruzim(String reason, String tluna, String creator,  int upvotes) {
         this.reason = reason;
         this.creator = creator;
         this.tluna = tluna;

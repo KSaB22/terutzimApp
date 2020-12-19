@@ -35,7 +35,6 @@ public class MyListAdapter extends ArrayAdapter<String> {
         View rowView=inflater.inflate(R.layout.mylist, null,true);
 
         TextView titleText = (TextView) rowView.findViewById(R.id.title);
-        ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         TextView subtitleText = (TextView) rowView.findViewById(R.id.subtitle);
 
         titleText.setText(maintitle.get(position));
