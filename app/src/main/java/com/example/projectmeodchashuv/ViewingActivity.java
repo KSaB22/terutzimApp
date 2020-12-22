@@ -2,6 +2,7 @@ package com.example.projectmeodchashuv;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,7 +10,7 @@ import android.widget.TextView;
 
 public class ViewingActivity extends AppCompatActivity implements View.OnClickListener {
     TextView tluna,up,cr;
-    Button btn;
+    Button btn,share;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,6 +19,8 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
         up = findViewById(R.id.upvotes);
         cr =findViewById(R.id.cr);
         btn = findViewById(R.id.upbtn);
+        share = findViewById(R.id.share);
+        share.setOnClickListener(this);
         btn.setOnClickListener(this);
         tluna.setText(DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getTluna());
         cr.setText(  "נוצר על ידי " + DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getCreator());
@@ -26,14 +29,21 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        int j = getIntent().getIntExtra("PLACE", 0);
-        DataModel.teruzims.get(j).addUpvote(j);
-        DataModel.saveTeruzim();
-        for (int i = 0; i < DataModel.teruzims.size(); i++){
-            MainActivity.maintitle.set(i,"לשימוש " + DataModel.teruzims.get(i).getReason());
-            MainActivity.subtitle.set(i,DataModel.teruzims.get(i).getUpvotes() + " העלאות חיוביות");
+        if(v== btn) {
+            int j = getIntent().getIntExtra("PLACE", 0);
+            DataModel.teruzims.get(j).addUpvote(j);
+            DataModel.saveTeruzim();
+            for (int i = 0; i < DataModel.teruzims.size(); i++) {
+                MainActivity.maintitle.set(i, "לשימוש " + DataModel.teruzims.get(i).getReason());
+                MainActivity.subtitle.set(i, DataModel.teruzims.get(i).getUpvotes() + " העלאות חיוביות");
+            }
+            up.setText(DataModel.teruzims.get(j).getUpvotes() + "upvote(s)");
+            finish();
         }
-        up.setText(DataModel.teruzims.get(j).getUpvotes() + "upvote(s)");
-        finish();
+        else if(v == share){
+            Intent i = new Intent(this, MessagingActivity.class);
+            i.putExtra("TERUZ", DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getTluna() );
+            startActivity(i);
+        }
     }
 }

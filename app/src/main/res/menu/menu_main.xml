@@ -7,10 +7,11 @@
     android:orderInCategory="100"
     app:showAsAction="never"
     />
-    <item
+   <!-- <item
         android:id="@+id/smsSender"
         android:title="Send SmS to someone"
         android:orderInCategory="100"
         app:showAsAction="never"/>
+        -->
 
 </menu>

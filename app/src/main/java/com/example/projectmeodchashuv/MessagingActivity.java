@@ -22,7 +22,6 @@ import android.widget.Toast;
 
 public class MessagingActivity extends AppCompatActivity implements View.OnClickListener {
     final int SEND_SMS_PERMISSION_REQUEST_CODE = 1;
-    EditText etnum, etmsg;
     Button send;
     private final int REQUEST_CODE = 99;
     Button btPick;
@@ -32,7 +31,6 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messaging);
-        etmsg = findViewById(R.id.msg);
         send = findViewById(R.id.snd);
         send.setOnClickListener(this);
         btPick = findViewById(R.id.btpick_contact);
@@ -52,7 +50,7 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
     }
 
     public void onSend(View v) {
-        String message = etmsg.getText().toString();
+        String message = getIntent().getStringExtra("TERUZ");
         if (pnum == null || (pnum.length() < 2) || message == null || message.length() < 1) {
             return;
         }

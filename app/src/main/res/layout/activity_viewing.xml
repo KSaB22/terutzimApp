@@ -29,10 +29,17 @@
         android:textColor="?attr/subtitleTextColor"
         />
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Upvote"
         android:textSize="30dp"
         android:id="@+id/upbtn"
+        />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/share"
+        android:text="SHARE"
+        android:textSize="30dp"
         />
 </LinearLayout>
