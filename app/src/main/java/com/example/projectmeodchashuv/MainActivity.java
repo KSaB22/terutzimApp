@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         sharedPref = new SharedPref(this);
         if (sharedPref.LoadDarkModeState())
-            setTheme(R.style.DarkTheme);
+            setTheme(R.style.AppTheme_Dark);
         else
             setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
@@ -90,11 +91,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         public void onClick(DialogInterface dialog, int id) {
                             finish();
                             if (sharedPref.LoadDarkModeState()){
-                                sharedPref.setDarkModeState(true);
+                                sharedPref.setDarkModeState(false);
                                 restartapp();
                             }
                             else{
-                                sharedPref.setDarkModeState(false);
+                                sharedPref.setDarkModeState(true);
                                 restartapp();
                             }
 

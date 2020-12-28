@@ -12,21 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30dp"
-        android:textColor="?attr/subtitleTextColor"
+
          />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30dp"
         android:id="@+id/cr"
-        android:textColor="?attr/subtitleTextColor"
+
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/upvotes"
         android:textSize="30dp"
-        android:textColor="?attr/subtitleTextColor"
+
         />
     <Button
         android:layout_width="match_parent"

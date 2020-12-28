@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:hint="לשימוש ב..."
         android:inputType="text"
-        android:textColor="?attr/subtitleTextColor"/>
+        />
 
     <EditText
         android:id="@+id/theline"
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:hint="התירוץ"
         android:inputType="text"
-        android:textColor="?attr/subtitleTextColor"/>
+        />
 
     <EditText
         android:id="@+id/creator"
@@ -28,14 +28,14 @@
         android:layout_height="wrap_content"
         android:hint="שם היוצר"
         android:inputType="text"
-        android:textColor="?attr/subtitleTextColor"/>
+        />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="add"
         android:id="@+id/btn"
-        android:textColor="?attr/subtitleTextColor"/>
+        />
 
 
 </LinearLayout>
