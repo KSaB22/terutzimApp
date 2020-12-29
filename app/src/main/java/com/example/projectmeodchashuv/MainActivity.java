@@ -51,12 +51,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         maintitle = new ArrayList<String>();
         subtitle = new ArrayList<String>();
-        for (int i = 0; i < DataModel.teruzims.size(); i++){
-            maintitle.add("לשימוש " + DataModel.teruzims.get(i).getReason());
-            subtitle.add(DataModel.teruzims.get(i).getUpvotes() + " העלאות חיוביות");
-        }
+        maintitle.add("תירוצים לכל סיבה");
+        subtitle.add("");
+        maintitle.add("תירוצים לבית ספר");
+        subtitle.add("");
+
+
         adapter=new MyListAdapter(this, maintitle, subtitle);
 
         builder = new AlertDialog.Builder(this);
@@ -131,8 +135,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View v, int i, long l) {
-        Intent intent = new Intent(this , ViewingActivity.class);
-        intent.putExtra("PLACE" , i);
+        Intent intent = new Intent(this , SortingActivity.class);
+        if(i == 0)
+            intent.putExtra("REASON" , "הכל");
+        else
+            intent.putExtra("REASON" , "בית ספר");
         startActivity(intent);
     }
     @Override

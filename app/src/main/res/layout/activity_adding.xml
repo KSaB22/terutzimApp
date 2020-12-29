@@ -6,14 +6,17 @@
     tools:context=".AddingActivity"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/reason"
+
+    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="לשימוש ב..."
-        android:inputType="text"
-        />
-
+        android:text="choose category"
+        android:id="@+id/btnch"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/lv"/>
     <EditText
         android:id="@+id/theline"
         android:layout_width="match_parent"
@@ -36,6 +39,7 @@
         android:text="add"
         android:id="@+id/btn"
         />
+
 
 
 </LinearLayout>

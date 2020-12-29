@@ -97,6 +97,7 @@ NotificationsService extends Service {
         dbRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Teruzim newTeruz = snapshot.getValue(Teruzim.class);
                 if(first){
                     first = false;
                 }
@@ -121,8 +122,8 @@ NotificationsService extends Service {
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                             .setSmallIcon(R.mipmap.ic_launcher)
-                            .setContentTitle("Terutz")
-                            .setContentText("one Terutz has been added");
+                            .setContentTitle("Something happened, Come Check it out!")
+                            .setContentText(newTeruz.getTluna());
 
                     Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
                     TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
@@ -137,6 +138,7 @@ NotificationsService extends Service {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                Teruzim changedTeruz = snapshot.getValue(Teruzim.class);
                 if(first){
                     first = false;
                 }
@@ -161,8 +163,8 @@ NotificationsService extends Service {
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
                             .setSmallIcon(R.mipmap.ic_launcher)
-                            .setContentTitle("Terutz")
-                            .setContentText("one Terutz has been changed");
+                            .setContentTitle("Terutz has been changed")
+                            .setContentText(changedTeruz.getTluna());
 
                     Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
                     TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
