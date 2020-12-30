@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MessagingActivity"
     android:orientation="vertical"
-    android:background="?attr/backgroundColor">
+    >
     <Button
         android:id="@+id/btpick_contact"
         android:layout_width="match_parent"

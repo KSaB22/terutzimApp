@@ -40,6 +40,7 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
             Intent i = new Intent(this, MessagingActivity.class);
             i.putExtra("TERUZ", DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getTluna() );
             startActivity(i);
+            finish();
         }
     }
 }

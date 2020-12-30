@@ -21,9 +21,15 @@ public class LoadingActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference dbteruzRef;
     DatabaseReference dbuserRef;
+    SharedPref sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPref = new SharedPref(this);
+        if (sharedPref.LoadDarkModeState())
+            setTheme(R.style.AppTheme_Dark);
+        else
+            setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
 
