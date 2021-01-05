@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static ArrayList<String> subtitle = new ArrayList<String>();
     SharedPref sharedPref;
     AlertDialog.Builder builder;
+    public static ArrayList<Teruzim> mine = new ArrayList<>();
 
 
     @Override
@@ -71,9 +72,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnadd.setOnClickListener(this);
         lv.setOnItemClickListener(this);
         //bdika
-
-        Intent intent = new Intent(this, NotificationsService.class);
-        startService(intent);
+        if(LoadingActivity.first){
+            LoadingActivity.first = false;
+        }
+        else{
+            Intent intent = new Intent(this, NotificationsService.class);
+            startService(intent);
+        }
     }
 
     @Override
@@ -148,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (resultCode == Activity.RESULT_OK)
         {
             Teruzim teruz = new Teruzim(data.getStringExtra("REASON"),data.getStringExtra("TERUZ"),data.getStringExtra("CREATOR"), 0);
+            mine.add(teruz);
             DataModel.teruzims.add(teruz);
             DataModel.saveTeruzim();
 

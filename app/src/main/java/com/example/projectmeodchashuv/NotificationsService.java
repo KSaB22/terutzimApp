@@ -28,7 +28,7 @@ public class
 NotificationsService extends Service {
     public NotificationsService() {
     }
-    boolean first = true;
+    Boolean first = true;
 
     @Nullable
     @Override
@@ -100,39 +100,47 @@ NotificationsService extends Service {
                 Teruzim newTeruz = snapshot.getValue(Teruzim.class);
                 if(first){
                     first = false;
+                    return;
                 }
                 else{
-
-                    int NOTIFICATION_ID = 234;
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    String CHANNEL_ID = "Terutz";
-
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                        CharSequence name = "Terutz";
-                        String Description = "Terutzim channel";
-                        int importance = NotificationManager.IMPORTANCE_HIGH;
-                        NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-                        mChannel.setDescription(Description);
-                        mChannel.enableLights(true);
-                        mChannel.setLightColor(Color.RED);
-                        mChannel.enableVibration(true);
-                        mChannel.setShowBadge(true);
-                        notificationManager.createNotificationChannel(mChannel);
+                    boolean flag = true;
+                    for(int i = 0; i < MainActivity.mine.size(); i++) {
+                        if(flag&&newTeruz == MainActivity.mine.get(i))
+                            return;
+                        flag = false;
                     }
+                    if(flag){
+                        int NOTIFICATION_ID = 234;
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        String CHANNEL_ID = "Terutz";
 
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                            .setSmallIcon(R.mipmap.ic_launcher)
-                            .setContentTitle("Something happened, Come Check it out!")
-                            .setContentText(newTeruz.getTluna());
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                            CharSequence name = "Terutz";
+                            String Description = "Terutzim channel";
+                            int importance = NotificationManager.IMPORTANCE_HIGH;
+                            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+                            mChannel.setDescription(Description);
+                            mChannel.enableLights(true);
+                            mChannel.setLightColor(Color.RED);
+                            mChannel.enableVibration(true);
+                            mChannel.setShowBadge(true);
+                            notificationManager.createNotificationChannel(mChannel);
+                        }
 
-                    Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
-                    TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
-                    stackBuilder.addParentStack(MainActivity.class);
-                    stackBuilder.addNextIntent(resultIntent);
-                    PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-                    builder.setContentIntent(resultPendingIntent);
-                    notificationManager.notify(NOTIFICATION_ID, builder.build());
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                                .setSmallIcon(R.mipmap.ic_launcher)
+                                .setContentTitle("Something happened, Come Check it out!")
+                                .setContentText(newTeruz.getTluna());
 
+                        Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
+                        stackBuilder.addParentStack(MainActivity.class);
+                        stackBuilder.addNextIntent(resultIntent);
+                        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                        builder.setContentIntent(resultPendingIntent);
+                        notificationManager.notify(NOTIFICATION_ID, builder.build());
+
+                    }
                 }
             }
 
@@ -141,39 +149,46 @@ NotificationsService extends Service {
                 Teruzim changedTeruz = snapshot.getValue(Teruzim.class);
                 if(first){
                     first = false;
+                    return;
                 }
                 else{
-
-                    int NOTIFICATION_ID = 234;
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    String CHANNEL_ID = "Terutz";
-
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                        CharSequence name = "Terutz";
-                        String Description = "Terutzim channel";
-                        int importance = NotificationManager.IMPORTANCE_HIGH;
-                        NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-                        mChannel.setDescription(Description);
-                        mChannel.enableLights(true);
-                        mChannel.setLightColor(Color.RED);
-                        mChannel.enableVibration(true);
-                        mChannel.setShowBadge(true);
-                        notificationManager.createNotificationChannel(mChannel);
+                    boolean flag = true;
+                    for(int i = 0; i < MainActivity.mine.size(); i++) {
+                    if(flag && changedTeruz == MainActivity.mine.get(i))
+                        return;
+                        flag = false;
                     }
+                    if(flag) {
+                        int NOTIFICATION_ID = 234;
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        String CHANNEL_ID = "Terutz";
 
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                            .setSmallIcon(R.mipmap.ic_launcher)
-                            .setContentTitle("Terutz has been changed")
-                            .setContentText(changedTeruz.getTluna());
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                            CharSequence name = "Terutz";
+                            String Description = "Terutzim channel";
+                            int importance = NotificationManager.IMPORTANCE_HIGH;
+                            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+                            mChannel.setDescription(Description);
+                            mChannel.enableLights(true);
+                            mChannel.setLightColor(Color.RED);
+                            mChannel.enableVibration(true);
+                            mChannel.setShowBadge(true);
+                            notificationManager.createNotificationChannel(mChannel);
+                        }
 
-                    Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
-                    TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
-                    stackBuilder.addParentStack(MainActivity.class);
-                    stackBuilder.addNextIntent(resultIntent);
-                    PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-                    builder.setContentIntent(resultPendingIntent);
-                    notificationManager.notify(NOTIFICATION_ID, builder.build());
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                                .setSmallIcon(R.mipmap.ic_launcher)
+                                .setContentTitle("Terutz has been changed")
+                                .setContentText(changedTeruz.getTluna());
 
+                        Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
+                        stackBuilder.addParentStack(MainActivity.class);
+                        stackBuilder.addNextIntent(resultIntent);
+                        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                        builder.setContentIntent(resultPendingIntent);
+                        notificationManager.notify(NOTIFICATION_ID, builder.build());
+                    }
                 }
             }
 

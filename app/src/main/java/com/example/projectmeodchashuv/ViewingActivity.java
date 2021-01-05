@@ -32,6 +32,7 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
         if(v== btn) {
             int j = getIntent().getIntExtra("PLACE", 0);
             DataModel.teruzims.get(j).addUpvote(j);
+            MainActivity.mine.add(DataModel.teruzims.get(j));
             DataModel.saveTeruzim();
             up.setText(DataModel.teruzims.get(j).getUpvotes() + "upvote(s)");
             finish();

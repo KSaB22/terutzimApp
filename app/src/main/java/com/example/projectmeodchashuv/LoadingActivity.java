@@ -21,7 +21,7 @@ public class LoadingActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference dbteruzRef;
     DatabaseReference dbuserRef;
-    SharedPref sharedPref;
+    public static Boolean first = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
