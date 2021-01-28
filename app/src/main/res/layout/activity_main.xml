@@ -7,13 +7,26 @@
     tools:context=".MainActivity"
     android:orientation="vertical"
     >
-
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add"
-        android:id="@+id/btnadd"
-        android:textSize="30dp"/>
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="הוסף"
+            android:id="@+id/btnadd"
+            android:textSize="30dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="קטגוריות לתירוצים:"
+            android:textSize="30dp"/>
+
+    </LinearLayout>
+
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

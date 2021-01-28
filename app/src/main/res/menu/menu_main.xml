@@ -7,6 +7,12 @@
     android:orderInCategory="100"
     app:showAsAction="never"
     />
+    <item
+        android:id="@+id/suggest"
+        android:title="Suggest a category"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        />
    <!-- <item
         android:id="@+id/smsSender"
         android:title="Send SmS to someone"

@@ -125,6 +125,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             alert.show();
 
         }
+        else if (R.id.suggest == item.getItemId()){
+            Intent i = new Intent(this, SuggestingActivity.class);
+            startActivity(i);
+        }
 //        else if(R.id.smsSender == item.getItemId()){
 //            Intent i = new Intent(this, MessagingActivity.class);
 //            startActivity(i);
