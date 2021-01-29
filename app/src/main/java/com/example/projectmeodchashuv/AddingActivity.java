@@ -26,9 +26,16 @@ public class AddingActivity extends AppCompatActivity implements View.OnClickLis
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference("teruzim");
     MyListAdapter adapter;
+    SharedPref sharedPref;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPref = new SharedPref(this);
+        if (sharedPref.LoadDarkModeState())
+            setTheme(R.style.AppTheme_Dark);
+        else
+            setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adding);
         ETteruz = findViewById(R.id.theline);

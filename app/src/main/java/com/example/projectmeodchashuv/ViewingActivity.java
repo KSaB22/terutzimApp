@@ -13,9 +13,15 @@ import java.util.ArrayList;
 public class ViewingActivity extends AppCompatActivity implements View.OnClickListener {
     TextView tluna,up,cr;
     Button btn,share;
+    SharedPref sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPref = new SharedPref(this);
+        if (sharedPref.LoadDarkModeState())
+            setTheme(R.style.AppTheme_Dark);
+        else
+            setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_viewing);
         tluna = findViewById(R.id.Teruz);

@@ -16,8 +16,14 @@ public class SortingActivity extends AppCompatActivity implements AdapterView.On
         MyListAdapter adapter;
         public static ArrayList maintitle;
         public static ArrayList subtitle;
+        SharedPref sharedPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPref = new SharedPref(this);
+        if (sharedPref.LoadDarkModeState())
+            setTheme(R.style.AppTheme_Dark);
+        else
+            setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sorting);
         maintitle = new ArrayList<String>();

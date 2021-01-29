@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.IBinder;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +30,7 @@ public class
 NotificationsService extends Service {
     public NotificationsService() {
     }
+
     Boolean first = true;
 
     @Nullable
@@ -36,6 +38,20 @@ NotificationsService extends Service {
     public IBinder onBind(Intent intent) {
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+
+    static boolean isSame(Teruzim m, Teruzim z) {
+        if (!m.getTluna().equals(z.getTluna()))
+            return false;
+        else if (!m.getReason().equals(z.getReason()))
+            return false;
+        else if (!m.getCreator().equals(z.getCreator()))
+            return false;
+        else if(m.getUpvotes() != z.getUpvotes())
+            return false;
+        return true;
+    }
+
 
 
     @Override
@@ -116,13 +132,18 @@ NotificationsService extends Service {
 
                 Teruzim newTeruz = snapshot.getValue(Teruzim.class);
                 if(first){
-                    first = false;
-                    return;
+                    if(previousChildName != null){
+                     if(Integer.parseInt(previousChildName) == (DataModel.teruzims.size()-2)) {
+                         first = false;
+                         return;
+                     }
+                    }
+
                 }
                 else{
                     if(MainActivity.niggerBack != null)
                         for(int i = 0; i < MainActivity.niggerBack.size(); i++){
-                            if(newTeruz == MainActivity.niggerBack.get(i))
+                            if(isSame(newTeruz,MainActivity.niggerBack.get(i)))
                                 return;
                         }
                     boolean flag = true;
@@ -240,5 +261,6 @@ NotificationsService extends Service {
 
         return super.onStartCommand(intent, flags, startId);
     }
+
 
 }

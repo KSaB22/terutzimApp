@@ -23,6 +23,7 @@ public class LoadingActivity extends AppCompatActivity {
     DatabaseReference dbuserRef;
     public static Boolean first = true;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

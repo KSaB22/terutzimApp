@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SharedPref sharedPref;
     AlertDialog.Builder builder;
     public static ArrayList<Teruzim> mine = new ArrayList<>();
-    public static ArrayList<Teruzim> niggerBack;
+    public static ArrayList<Teruzim> niggerBack = new ArrayList<>();
 
 
     @Override
@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //niggerBack.addAll(DataModel.teruzims);
 
         maintitle = new ArrayList<String>();
         subtitle = new ArrayList<String>();

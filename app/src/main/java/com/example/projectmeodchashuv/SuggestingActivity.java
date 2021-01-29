@@ -15,8 +15,14 @@ import android.widget.Toast;
 public class SuggestingActivity extends AppCompatActivity implements View.OnClickListener {
     EditText cat;
     Button send;
+    SharedPref sharedPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPref = new SharedPref(this);
+        if (sharedPref.LoadDarkModeState())
+            setTheme(R.style.AppTheme_Dark);
+        else
+            setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suggesting);
         cat = findViewById(R.id.newcat);
