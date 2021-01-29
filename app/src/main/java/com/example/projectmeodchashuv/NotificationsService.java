@@ -31,7 +31,7 @@ NotificationsService extends Service {
     public NotificationsService() {
     }
 
-    Boolean first = true;
+
 
     @Nullable
     @Override
@@ -131,27 +131,28 @@ NotificationsService extends Service {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
                 Teruzim newTeruz = snapshot.getValue(Teruzim.class);
-                if(first){
+                if(LoadingActivity.first){
                     if(previousChildName != null){
                      if(Integer.parseInt(previousChildName) == (DataModel.teruzims.size()-2)) {
-                         first = false;
+                         LoadingActivity.first = false;
                          return;
                      }
                     }
 
                 }
                 else{
+                    ArrayList<String> temp= new ArrayList<>();
+                    for (int i = 0; i < MainActivity.mine.size(); i++){
+                        temp.add(MainActivity.mine.get(i).getTluna().toString());
+                    }
+                    SharedPref.writeListInPref(getApplicationContext(), temp);
                     if(MainActivity.niggerBack != null)
                         for(int i = 0; i < MainActivity.niggerBack.size(); i++){
                             if(isSame(newTeruz,MainActivity.niggerBack.get(i)))
                                 return;
                         }
                     boolean flag = true;
-                    ArrayList<String> temp= new ArrayList<>();
-                    for (int i = 0; i < MainActivity.mine.size(); i++){
-                        temp.add(MainActivity.mine.get(i).getTluna().toString());
-                    }
-                    SharedPref.writeListInPref(getApplicationContext(), temp);
+
                     for(int i = 0; i < MainActivity.mine.size() && flag; i++) {
                         Log.w("new",newTeruz.getTluna());
                         Log.w("mine", MainActivity.mine.get(i).getTluna());
@@ -198,8 +199,8 @@ NotificationsService extends Service {
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Teruzim changedTeruz = snapshot.getValue(Teruzim.class);
-                if(first){
-                    first = false;
+                if(LoadingActivity.first){
+                    LoadingActivity.first = false;
                     return;
                 }
                 else{

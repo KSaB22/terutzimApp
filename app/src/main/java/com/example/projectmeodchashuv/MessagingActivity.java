@@ -22,9 +22,10 @@ import android.widget.Toast;
 
 public class MessagingActivity extends AppCompatActivity implements View.OnClickListener {
     final int SEND_SMS_PERMISSION_REQUEST_CODE = 1;
+    final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 2;
     Button send;
     private final int REQUEST_CODE = 99;
-    Button btPick;
+    Button btPick,sms,rc;
     String pnum = "";
     SharedPref sharedPref;
 
@@ -42,14 +43,18 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
         send.setOnClickListener(this);
         btPick = findViewById(R.id.btpick_contact);
         btPick.setOnClickListener(this);
+        sms = findViewById(R.id.storage);
+        sms.setOnClickListener(this);
+        rc = findViewById(R.id.kaki);
+        rc.setOnClickListener(this);
         btPick.setEnabled(false);
-        if (CheckPermission(Manifest.permission.SEND_SMS)) {
+        if (CheckPermission1(Manifest.permission.SEND_SMS)) {
             btPick.setEnabled(true);
         } else {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, SEND_SMS_PERMISSION_REQUEST_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, READ_CONTACTS_PERMISSION_REQUEST_CODE);
         }
         send.setEnabled(false);
-        if (CheckPermission(Manifest.permission.SEND_SMS)) {
+        if (CheckPermission1(Manifest.permission.SEND_SMS)) {
             send.setEnabled(true);
         } else {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SEND_SMS_PERMISSION_REQUEST_CODE);
@@ -61,7 +66,7 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
         if (pnum == null || (pnum.length() < 2) || message == null || message.length() < 1) {
             return;
         }
-        if (CheckPermission(Manifest.permission.SEND_SMS)) {
+        if (CheckPermission1(Manifest.permission.SEND_SMS)) {
             SmsManager smsManager = SmsManager.getDefault();
             smsManager.sendTextMessage(pnum, null, message, null, null);
             Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
@@ -72,13 +77,20 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
 
     }
 
-    public boolean CheckPermission(String perm) {
-        int check = ContextCompat.checkSelfPermission(this, perm);
-        return check == PackageManager.PERMISSION_GRANTED;
-    }
     public boolean CheckPermission1(String perm) {
         int check = ContextCompat.checkSelfPermission(this, perm);
         return check == PackageManager.PERMISSION_GRANTED;
+    }
+    public void checkPermission(String permission, int requestCode)
+    {
+        if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED) {
+
+            // Requesting the permission
+            ActivityCompat.requestPermissions(this, new String[] { permission }, requestCode);
+        }
+        else {
+            Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -89,6 +101,12 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
             Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
             startActivityForResult(intent, REQUEST_CODE);
             }
+        }
+        else if(v == sms){
+            checkPermission(Manifest.permission.SEND_SMS, SEND_SMS_PERMISSION_REQUEST_CODE);
+        }
+        else if(v == rc){
+            checkPermission(Manifest.permission.READ_CONTACTS, READ_CONTACTS_PERMISSION_REQUEST_CODE);
         }
     }
 

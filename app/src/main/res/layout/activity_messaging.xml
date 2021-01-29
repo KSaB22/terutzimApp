@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Pick number from contacts list"
         android:layout_gravity="center"
+        android:textSize="30dp"
         />
 
     <Button
@@ -20,7 +21,22 @@
         android:layout_height="wrap_content"
         android:text="Send"
         android:id="@+id/snd"
-        android:onClick="onSend"/>
+        android:onClick="onSend"
+        android:textSize="30dp"/>
+    <Button
+        android:id="@+id/storage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="SMS PERMISSION"
+        android:textSize="30dp"
+        android:padding="8dp" />
+    <Button
+        android:id="@+id/kaki"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CONTACTS PERMISSION"
+        android:textSize="30dp"
+        android:padding="8dp" />
 
 
 </LinearLayout>
