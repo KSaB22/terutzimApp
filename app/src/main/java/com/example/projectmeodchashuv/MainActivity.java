@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     SharedPref sharedPref;
     AlertDialog.Builder builder;
     public static ArrayList<Teruzim> mine = new ArrayList<>();
+    public static ArrayList<Teruzim> niggerBack;
 
 
     @Override
@@ -156,6 +157,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK)
         {
+            niggerBack.clear();
+            niggerBack.addAll(DataModel.teruzims);
             Teruzim teruz = new Teruzim(data.getStringExtra("REASON"),data.getStringExtra("TERUZ"),data.getStringExtra("CREATOR"), 0);
             mine.add(teruz);
             DataModel.teruzims.add(teruz);

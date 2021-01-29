@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -45,44 +46,59 @@ NotificationsService extends Service {
         /*dbRef.addValueEventListener(new ValueEventListener() {
 
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
+            public void onDataChange(DataSnapshot snapshot) {
+                ArrayList<Teruzim> newTeruz = (ArrayList<Teruzim>) snapshot.getValue();
                 if(first){
                     first = false;
+                    return;
                 }
                 else{
-
-                    int NOTIFICATION_ID = 234;
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    String CHANNEL_ID = "Terutz";
-
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                        CharSequence name = "Terutz";
-                        String Description = "Terutzim channel";
-                        int importance = NotificationManager.IMPORTANCE_HIGH;
-                        NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-                        mChannel.setDescription(Description);
-                        mChannel.enableLights(true);
-                        mChannel.setLightColor(Color.RED);
-                        mChannel.enableVibration(true);
-                        mChannel.setShowBadge(true);
-                        notificationManager.createNotificationChannel(mChannel);
+                    boolean flag = true;
+                    ArrayList<String> temp= new ArrayList<>();
+                    for (int i = 0; i < MainActivity.mine.size(); i++){
+                        temp.add(MainActivity.mine.get(i).getTluna().toString());
                     }
+                    SharedPref.writeListInPref(getApplicationContext(), temp);
+                    for (int i = 0; i < newTeruz.size() && flag; i++) {
+                        for (int j = 0; j < MainActivity.mine.size() && flag; j++) {
+                            if (newTeruz.get(i) == MainActivity.mine.get(j)) {
+                                flag = false;
+                            }
 
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                            .setSmallIcon(R.mipmap.ic_launcher)
-                            .setContentTitle("Terutz")
-                            .setContentText("one Terutz has been changed or added");
+                        }
+                    }
+                    if(flag){
+                        int NOTIFICATION_ID = 234;
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        String CHANNEL_ID = "Terutz";
 
-                    Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
-                    TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
-                    stackBuilder.addParentStack(MainActivity.class);
-                    stackBuilder.addNextIntent(resultIntent);
-                    PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-                    builder.setContentIntent(resultPendingIntent);
-                    notificationManager.notify(NOTIFICATION_ID, builder.build());
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                            CharSequence name = "Terutz";
+                            String Description = "Terutzim channel";
+                            int importance = NotificationManager.IMPORTANCE_HIGH;
+                            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+                            mChannel.setDescription(Description);
+                            mChannel.enableLights(true);
+                            mChannel.setLightColor(Color.RED);
+                            mChannel.enableVibration(true);
+                            mChannel.setShowBadge(true);
+                            notificationManager.createNotificationChannel(mChannel);
+                        }
 
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                                .setSmallIcon(R.mipmap.ic_launcher)
+                                .setContentTitle("Something happened, Come Check it out!")
+                                .setContentText(newTeruz.get(0).getTluna());
+
+                        Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
+                        stackBuilder.addParentStack(MainActivity.class);
+                        stackBuilder.addNextIntent(resultIntent);
+                        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                        builder.setContentIntent(resultPendingIntent);
+                        notificationManager.notify(NOTIFICATION_ID, builder.build());
+
+                    }
                 }
 
             }
@@ -97,17 +113,31 @@ NotificationsService extends Service {
         dbRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
                 Teruzim newTeruz = snapshot.getValue(Teruzim.class);
                 if(first){
                     first = false;
                     return;
                 }
                 else{
+                    if(MainActivity.niggerBack != null)
+                        for(int i = 0; i < MainActivity.niggerBack.size(); i++){
+                            if(newTeruz == MainActivity.niggerBack.get(i))
+                                return;
+                        }
                     boolean flag = true;
-                    for(int i = 0; i < MainActivity.mine.size(); i++) {
-                        if(flag&&newTeruz == MainActivity.mine.get(i))
-                            return;
-                        flag = false;
+                    ArrayList<String> temp= new ArrayList<>();
+                    for (int i = 0; i < MainActivity.mine.size(); i++){
+                        temp.add(MainActivity.mine.get(i).getTluna().toString());
+                    }
+                    SharedPref.writeListInPref(getApplicationContext(), temp);
+                    for(int i = 0; i < MainActivity.mine.size() && flag; i++) {
+                        Log.w("new",newTeruz.getTluna());
+                        Log.w("mine", MainActivity.mine.get(i).getTluna());
+                        if(newTeruz.getTluna().equals(MainActivity.mine.get(i).getTluna())){
+                            flag = false;
+                        }
+
                     }
                     if(flag){
                         int NOTIFICATION_ID = 234;
