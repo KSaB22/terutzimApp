@@ -18,6 +18,20 @@
         android:title="Send SmS to someone"
         android:orderInCategory="100"
         app:showAsAction="never"/>
+
         -->
+    <item
+        android:id="@+id/login"
+        android:title="Login"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/regi"
+        android:title="Register"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        />
+
 
 </menu>

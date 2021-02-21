@@ -47,5 +47,14 @@ public class SharedPref {
         ArrayList<String> list = gson.fromJson(jsonString, type);
         return list;
     }
+    public void SetUsername(String username){
+        SharedPreferences.Editor editor = mySharedPrefrences.edit();
+        editor.putString("username",username);
+        editor.commit();
+    }
+    public String GetUsername(){
+        String user =  mySharedPrefrences.getString("username", "guest69");
+        return user;
+    }
 
 }

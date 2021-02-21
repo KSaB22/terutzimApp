@@ -46,8 +46,7 @@ public class LoadingActivity extends AppCompatActivity {
 
                 DataModel.teruzims.addAll(fbTeruzim);
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivityForResult(intent, 0);
+
 
             }
             @Override
@@ -56,6 +55,23 @@ public class LoadingActivity extends AppCompatActivity {
 
             }
         });
+        dbuserRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                GenericTypeIndicator<ArrayList<User>> t = new GenericTypeIndicator<ArrayList<User>>() {};
+                ArrayList<User> fbUser = dataSnapshot.getValue(t);
+                DataModel.users.clear();
+                DataModel.users.addAll(fbUser);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(intent, 0);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
 
     }

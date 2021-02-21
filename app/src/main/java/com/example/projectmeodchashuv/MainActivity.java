@@ -131,6 +131,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent i = new Intent(this, SuggestingActivity.class);
             startActivity(i);
         }
+        else if(R.id.regi == item.getItemId()){
+            Intent i = new Intent(this, RegisterActivity.class);
+            startActivity(i);
+        }
+        else if (R.id.login == item.getItemId()){
+
+        }
 //        else if(R.id.smsSender == item.getItemId()){
 //            Intent i = new Intent(this, MessagingActivity.class);
 //            startActivity(i);
