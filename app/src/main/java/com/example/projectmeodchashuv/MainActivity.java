@@ -136,7 +136,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(i);
         }
         else if (R.id.login == item.getItemId()){
-
+            Intent i = new Intent(this, LoginActivity.class);
+            startActivity(i);
+        }
+        else if (R.id.signout == item.getItemId()){
+            sharedPref.SetUsername("guest69");
+            Toast.makeText(this,"You signed out", Toast.LENGTH_SHORT).show();
         }
 //        else if(R.id.smsSender == item.getItemId()){
 //            Intent i = new Intent(this, MessagingActivity.class);

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -57,9 +58,18 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
             finish();
         }
         else if(v == share){
-            Intent i = new Intent(this, MessagingActivity.class);
-            i.putExtra("TERUZ", DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getTluna() );
-            startActivity(i);
+            //Intent i = new Intent(this, MessagingActivity.class);
+            //i.putExtra("TERUZ", DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getTluna() );
+            //startActivity(i);
+            Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
+            whatsappIntent.setType("text/plain");
+            whatsappIntent.setPackage("com.whatsapp");
+            whatsappIntent.putExtra(Intent.EXTRA_TEXT, DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getTluna());
+            try {
+                startActivity(whatsappIntent);
+            } catch (android.content.ActivityNotFoundException ex) {
+                Toast.makeText(this,"Whatsapp have not been installed.", Toast.LENGTH_SHORT).show();
+            }
             finish();
         }
     }

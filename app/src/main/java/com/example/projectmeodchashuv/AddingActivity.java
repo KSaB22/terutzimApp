@@ -63,8 +63,8 @@ public class AddingActivity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(this, "לא רשמת תירוץ", Toast.LENGTH_SHORT).show();
             else if (reason.equals(""))
                 Toast.makeText(this, "לא בחרת שימוש", Toast.LENGTH_SHORT).show();
-            else if (ETcreator.getText().toString().isEmpty())
-                Toast.makeText(this, "לא רשמת את שם היוצר", Toast.LENGTH_SHORT).show();
+            else if (sharedPref.GetUsername().equals("guest69"))
+                Toast.makeText(this, "כנס  למשתמש כדי לפרסם תירוץ", Toast.LENGTH_SHORT).show();
             else {
                 Intent intent = new Intent();
                 intent.putExtra("REASON", reason);

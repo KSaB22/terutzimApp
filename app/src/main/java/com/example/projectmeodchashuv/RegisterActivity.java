@@ -15,6 +15,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     SharedPref sharedPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPref = new SharedPref(this);
         if (sharedPref.LoadDarkModeState())
             setTheme(R.style.AppTheme_Dark);
         else
