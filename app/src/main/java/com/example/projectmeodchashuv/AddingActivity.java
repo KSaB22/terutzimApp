@@ -19,8 +19,8 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class AddingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
-    EditText ETcreator,ETteruz;
-    Button btn,chooser;
+    EditText ETcreator, ETteruz;
+    Button btn, chooser;
     String reason = "";
     ListView lv;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -47,18 +47,19 @@ public class AddingActivity extends AppCompatActivity implements View.OnClickLis
         btn.setOnClickListener(this);
         ArrayList<String> maintitle = new ArrayList<String>();
         ArrayList<String> subtitle = new ArrayList<String>();
+        //todo:
         maintitle.add("תירוצים לכל סיבה");
         subtitle.add("");
         maintitle.add("תירוצים לבית ספר");
         subtitle.add("");
-        adapter=new MyListAdapter(this, maintitle, subtitle);
+        adapter = new MyListAdapter(this, maintitle, subtitle);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if(v == btn) {
+        if (v == btn) {
             if (ETteruz.getText().toString().isEmpty())
                 Toast.makeText(this, "לא רשמת תירוץ", Toast.LENGTH_SHORT).show();
             else if (reason.equals(""))
@@ -73,8 +74,7 @@ public class AddingActivity extends AppCompatActivity implements View.OnClickLis
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }
-        }
-        else if(v == chooser){
+        } else if (v == chooser) {
             lv.setVisibility(View.VISIBLE);
             chooser.setVisibility(View.GONE);
         }
@@ -82,7 +82,7 @@ public class AddingActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View v, int i, long id) {
-        switch (i){
+        switch (i) {
             case 0:
                 reason = "הכל";
                 break;

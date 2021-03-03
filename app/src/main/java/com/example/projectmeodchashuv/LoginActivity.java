@@ -12,6 +12,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button submit;
     EditText name, pass;
     SharedPref sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPref = new SharedPref(this);
@@ -29,24 +30,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if(name.getText().toString().equals("")|| pass.getText().toString().equals("")){
-            Toast.makeText(this, "fill in all boxes",Toast.LENGTH_SHORT).show();
-        }
-        else{
-            boolean flag= false;
+        if (name.getText().toString().equals("") || pass.getText().toString().equals("")) {
+            Toast.makeText(this, "fill in all boxes", Toast.LENGTH_SHORT).show();
+        } else {
+            boolean flag = false;
             int temp = 0;
-            for (int i = 0; i < DataModel.users.size() && !flag; i++){
-                if(DataModel.users.get(i).getUsername().equals(name.getText().toString())){
+            for (int i = 0; i < DataModel.users.size() && !flag; i++) {
+                if (DataModel.users.get(i).getUsername().equals(name.getText().toString())) {
                     flag = true;
                     temp = i;
                 }
             }
-            if(!flag){
-                Toast.makeText(this,"No account with that username", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
-                if(DataModel.users.get(temp).getPassword().equals(pass.getText().toString()) && DataModel.users.get(temp).getUsername().equals(name.getText().toString())){
+            if (!flag) {
+                Toast.makeText(this, "No account with that username", Toast.LENGTH_SHORT).show();
+            } else {
+                if (DataModel.users.get(temp).getPassword().equals(pass.getText().toString()) && DataModel.users.get(temp).getUsername().equals(name.getText().toString())) {
                     sharedPref.SetUsername(name.getText().toString());
                     finish();
                 }

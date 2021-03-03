@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,7 +36,8 @@ public class LoadingActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                GenericTypeIndicator<ArrayList<Teruzim>> t = new GenericTypeIndicator<ArrayList<Teruzim>>() {};
+                GenericTypeIndicator<ArrayList<Teruzim>> t = new GenericTypeIndicator<ArrayList<Teruzim>>() {
+                };
                 ArrayList<Teruzim> fbTeruzim = dataSnapshot.getValue(t);
                 //GenericTypeIndicator<String> t = new GenericTypeIndicator<String>() {};
                 //String kaki = dataSnapshot.getValue(t);
@@ -47,8 +47,8 @@ public class LoadingActivity extends AppCompatActivity {
                 DataModel.teruzims.addAll(fbTeruzim);
 
 
-
             }
+
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
@@ -58,7 +58,8 @@ public class LoadingActivity extends AppCompatActivity {
         dbuserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<ArrayList<User>> t = new GenericTypeIndicator<ArrayList<User>>() {};
+                GenericTypeIndicator<ArrayList<User>> t = new GenericTypeIndicator<ArrayList<User>>() {
+                };
                 ArrayList<User> fbUser = dataSnapshot.getValue(t);
                 DataModel.users.clear();
                 DataModel.users.addAll(fbUser);
@@ -71,7 +72,6 @@ public class LoadingActivity extends AppCompatActivity {
 
             }
         });
-
 
 
     }

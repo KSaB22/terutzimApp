@@ -23,16 +23,16 @@ public class MyListAdapter extends ArrayAdapter<String> {
         super(context, R.layout.mylist, maintitle);
         // TODO Auto-generated constructor stub
 
-        this.context=context;
-        this.maintitle=maintitle;
-        this.subtitle=subtitle;
+        this.context = context;
+        this.maintitle = maintitle;
+        this.subtitle = subtitle;
 
 
     }
 
-    public View getView(int position,View view,ViewGroup parent) {
-        LayoutInflater inflater=context.getLayoutInflater();
-        View rowView=inflater.inflate(R.layout.mylist, null,true);
+    public View getView(int position, View view, ViewGroup parent) {
+        LayoutInflater inflater = context.getLayoutInflater();
+        View rowView = inflater.inflate(R.layout.mylist, null, true);
 
         TextView titleText = (TextView) rowView.findViewById(R.id.title);
         TextView subtitleText = (TextView) rowView.findViewById(R.id.subtitle);

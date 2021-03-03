@@ -13,6 +13,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     Button submit;
     EditText name, pass;
     SharedPref sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPref = new SharedPref(this);
@@ -30,26 +31,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if(name.getText().toString().equals("")|| pass.getText().toString().equals("")){
-            Toast.makeText(this, "fill in all boxes",Toast.LENGTH_SHORT).show();
-        }
-        else{
-            boolean flag= true;
-            for (int i = 0; i < DataModel.users.size() && flag; i++){
-                if(DataModel.users.get(i).getUsername().equals(name.getText().toString())){
+        if (name.getText().toString().equals("") || pass.getText().toString().equals("")) {
+            Toast.makeText(this, "fill in all boxes", Toast.LENGTH_SHORT).show();
+        } else {
+            boolean flag = true;
+            for (int i = 0; i < DataModel.users.size() && flag; i++) {
+                if (DataModel.users.get(i).getUsername().equals(name.getText().toString())) {
                     flag = false;
                 }
             }
-            if(flag){
-                User temp = new User(name.getText().toString(),pass.getText().toString());
+            if (flag) {
+                User temp = new User(name.getText().toString(), pass.getText().toString());
                 DataModel.users.add(temp);
                 DataModel.saveUsers();
                 sharedPref.SetUsername(name.getText().toString());
                 finish();
-            }
-            else
-            {
-                Toast.makeText(this,"Username already taken", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Username already taken", Toast.LENGTH_SHORT).show();
             }
         }
     }

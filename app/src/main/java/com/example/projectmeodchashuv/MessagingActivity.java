@@ -25,7 +25,7 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
     final int READ_CONTACTS_PERMISSION_REQUEST_CODE = 2;
     Button send;
     private final int REQUEST_CODE = 99;
-    Button btPick,sms,rc;
+    Button btPick, sms, rc;
     String pnum = "";
     SharedPref sharedPref;
 
@@ -81,31 +81,29 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
         int check = ContextCompat.checkSelfPermission(this, perm);
         return check == PackageManager.PERMISSION_GRANTED;
     }
-    public void checkPermission(String permission, int requestCode)
-    {
+
+    public void checkPermission(String permission, int requestCode) {
         if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED) {
 
             // Requesting the permission
-            ActivityCompat.requestPermissions(this, new String[] { permission }, requestCode);
-        }
-        else {
+            ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
+        } else {
             Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
     public void onClick(View v) {
-        if (v == send){onSend(v);}
-        else if (v == btPick) {
-            if(CheckPermission1(Manifest.permission.READ_CONTACTS)){
-            Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
-            startActivityForResult(intent, REQUEST_CODE);
+        if (v == send) {
+            onSend(v);
+        } else if (v == btPick) {
+            if (CheckPermission1(Manifest.permission.READ_CONTACTS)) {
+                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.Contacts.CONTENT_URI);
+                startActivityForResult(intent, REQUEST_CODE);
             }
-        }
-        else if(v == sms){
+        } else if (v == sms) {
             checkPermission(Manifest.permission.SEND_SMS, SEND_SMS_PERMISSION_REQUEST_CODE);
-        }
-        else if(v == rc){
+        } else if (v == rc) {
             checkPermission(Manifest.permission.READ_CONTACTS, READ_CONTACTS_PERMISSION_REQUEST_CODE);
         }
     }
@@ -113,7 +111,7 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode) {
+        switch (requestCode) {
             case (REQUEST_CODE):
                 if (resultCode == Activity.RESULT_OK) {
                     Uri contactData = data.getData();

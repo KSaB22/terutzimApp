@@ -13,16 +13,19 @@ import java.util.List;
 
 public class SharedPref {
     SharedPreferences mySharedPrefrences;
-    public SharedPref(Context context){
+
+    public SharedPref(Context context) {
         mySharedPrefrences = context.getSharedPreferences("filename", context.MODE_PRIVATE);
     }
-    public void setDarkModeState(boolean state){
+
+    public void setDarkModeState(boolean state) {
         SharedPreferences.Editor editor = mySharedPrefrences.edit();
         editor.putBoolean("DarkMode", state);
         editor.commit();
     }
+
     public boolean LoadDarkModeState() {
-        boolean state= mySharedPrefrences.getBoolean("DarkMode", false);
+        boolean state = mySharedPrefrences.getBoolean("DarkMode", false);
         return state;
     }
 
@@ -43,17 +46,20 @@ public class SharedPref {
         String jsonString = pref.getString(LIST_KEY, "");
 
         Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<String>>() {}.getType();
+        Type type = new TypeToken<ArrayList<String>>() {
+        }.getType();
         ArrayList<String> list = gson.fromJson(jsonString, type);
         return list;
     }
-    public void SetUsername(String username){
+
+    public void SetUsername(String username) {
         SharedPreferences.Editor editor = mySharedPrefrences.edit();
-        editor.putString("username",username);
+        editor.putString("username", username);
         editor.commit();
     }
-    public String GetUsername(){
-        String user =  mySharedPrefrences.getString("username", "guest69");
+
+    public String GetUsername() {
+        String user = mySharedPrefrences.getString("username", "guest69");
         return user;
     }
 

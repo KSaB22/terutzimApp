@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,8 +20,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -30,7 +27,6 @@ public class
 NotificationsService extends Service {
     public NotificationsService() {
     }
-
 
 
     @Nullable
@@ -47,11 +43,10 @@ NotificationsService extends Service {
             return false;
         else if (!m.getCreator().equals(z.getCreator()))
             return false;
-        else if(m.getUpvotes() != z.getUpvotes())
+        else if (m.getUpvotes() != z.getUpvotes())
             return false;
         return true;
     }
-
 
 
     @Override
@@ -131,37 +126,36 @@ NotificationsService extends Service {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
                 Teruzim newTeruz = snapshot.getValue(Teruzim.class);
-                if(LoadingActivity.first){
-                    if(previousChildName != null){
-                     if(Integer.parseInt(previousChildName) == (DataModel.teruzims.size()-2)) {
-                         LoadingActivity.first = false;
-                         return;
-                     }
+                if (LoadingActivity.first) {
+                    if (previousChildName != null) {
+                        if (Integer.parseInt(previousChildName) == (DataModel.teruzims.size() - 2)) {
+                            LoadingActivity.first = false;
+                            return;
+                        }
                     }
 
-                }
-                else{
-                    ArrayList<String> temp= new ArrayList<>();
-                    for (int i = 0; i < MainActivity.mine.size(); i++){
+                } else {
+                    ArrayList<String> temp = new ArrayList<>();
+                    for (int i = 0; i < MainActivity.mine.size(); i++) {
                         temp.add(MainActivity.mine.get(i).getTluna().toString());
                     }
                     SharedPref.writeListInPref(getApplicationContext(), temp);
-                    if(MainActivity.niggerBack != null)
-                        for(int i = 0; i < MainActivity.niggerBack.size(); i++){
-                            if(isSame(newTeruz,MainActivity.niggerBack.get(i)))
+                    if (MainActivity.niggerBack != null)
+                        for (int i = 0; i < MainActivity.niggerBack.size(); i++) {
+                            if (isSame(newTeruz, MainActivity.niggerBack.get(i)))
                                 return;
                         }
                     boolean flag = true;
 
-                    for(int i = 0; i < MainActivity.mine.size() && flag; i++) {
-                        Log.w("new",newTeruz.getTluna());
+                    for (int i = 0; i < MainActivity.mine.size() && flag; i++) {
+                        Log.w("new", newTeruz.getTluna());
                         Log.w("mine", MainActivity.mine.get(i).getTluna());
-                        if(newTeruz.getTluna().equals(MainActivity.mine.get(i).getTluna())){
+                        if (newTeruz.getTluna().equals(MainActivity.mine.get(i).getTluna())) {
                             flag = false;
                         }
 
                     }
-                    if(flag){
+                    if (flag) {
                         int NOTIFICATION_ID = 234;
                         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                         String CHANNEL_ID = "Terutz";
@@ -199,18 +193,17 @@ NotificationsService extends Service {
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Teruzim changedTeruz = snapshot.getValue(Teruzim.class);
-                if(LoadingActivity.first){
+                if (LoadingActivity.first) {
                     LoadingActivity.first = false;
                     return;
-                }
-                else{
+                } else {
                     boolean flag = true;
-                    for(int i = 0; i < MainActivity.mine.size(); i++) {
-                    if(flag && changedTeruz == MainActivity.mine.get(i))
-                        return;
+                    for (int i = 0; i < MainActivity.mine.size(); i++) {
+                        if (flag && changedTeruz == MainActivity.mine.get(i))
+                            return;
                         flag = false;
                     }
-                    if(flag) {
+                    if (flag) {
                         int NOTIFICATION_ID = 234;
                         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                         String CHANNEL_ID = "Terutz";

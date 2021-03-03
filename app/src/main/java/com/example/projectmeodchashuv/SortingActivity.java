@@ -11,12 +11,13 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 public class SortingActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-        ArrayList<Integer> rembIndex= new ArrayList<>();
-        ListView lv;
-        MyListAdapter adapter;
-        public static ArrayList maintitle;
-        public static ArrayList subtitle;
-        SharedPref sharedPref;
+    ArrayList<Integer> rembIndex = new ArrayList<>();
+    ListView lv;
+    MyListAdapter adapter;
+    public static ArrayList maintitle;
+    public static ArrayList subtitle;
+    SharedPref sharedPref;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPref = new SharedPref(this);
@@ -29,23 +30,23 @@ public class SortingActivity extends AppCompatActivity implements AdapterView.On
         maintitle = new ArrayList<String>();
         subtitle = new ArrayList<String>();
         rembIndex.clear();
-        for (int i = 0; i< DataModel.teruzims.toArray().length; i++){
-             if(DataModel.teruzims.get(i).getReason().equals(getIntent().getStringExtra("REASON"))){
-                 rembIndex.add(i);
-                 maintitle.add(DataModel.teruzims.get(i).getTluna());
-                 subtitle.add(DataModel.teruzims.get(i).getUpvotes() + " העלאות חיוביות");
-             }
+        for (int i = 0; i < DataModel.teruzims.toArray().length; i++) {
+            if (DataModel.teruzims.get(i).getReason().equals(getIntent().getStringExtra("REASON"))) {
+                rembIndex.add(i);
+                maintitle.add(DataModel.teruzims.get(i).getTluna());
+                subtitle.add(DataModel.teruzims.get(i).getUpvotes() + " העלאות חיוביות");
+            }
         }
         lv = findViewById(R.id.lv);
-        adapter=new MyListAdapter(this, maintitle, subtitle);
+        adapter = new MyListAdapter(this, maintitle, subtitle);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(this);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View v, int i, long id) {
-        Intent intent = new Intent(this , ViewingActivity.class);
-        intent.putExtra("PLACE" , rembIndex.get(i));
+        Intent intent = new Intent(this, ViewingActivity.class);
+        intent.putExtra("PLACE", rembIndex.get(i));
         startActivity(intent);
         finish();
     }

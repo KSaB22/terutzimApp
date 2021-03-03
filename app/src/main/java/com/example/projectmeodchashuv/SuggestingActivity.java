@@ -15,9 +15,10 @@ import android.widget.Toast;
 
 public class SuggestingActivity extends AppCompatActivity implements View.OnClickListener {
     EditText cat;
-    Button send,sms;
+    Button send, sms;
     SharedPref sharedPref;
-    private static final int SMS_PERMISSION_CODE  = 100;
+    private static final int SMS_PERMISSION_CODE = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPref = new SharedPref(this);
@@ -36,36 +37,35 @@ public class SuggestingActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        if(v == send){
+        if (v == send) {
             String message = cat.getText().toString();
-            if ( message == null || message.length() < 1) {
+            if (message == null || message.length() < 1) {
                 return;
             }
             if (CheckPermission1(Manifest.permission.SEND_SMS)) {
                 SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage("+972586021103" , null, message, null, null);
+                smsManager.sendTextMessage("+972586021103", null, message, null, null);
                 Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
                 finish();
             } else {
                 Toast.makeText(this, "Permission to send sms denied", Toast.LENGTH_SHORT).show();
             }
-        }
-        else if(v == sms){
+        } else if (v == sms) {
             checkPermission(Manifest.permission.SEND_SMS, SMS_PERMISSION_CODE);
         }
 
     }
-    public void checkPermission(String permission, int requestCode)
-    {
+
+    public void checkPermission(String permission, int requestCode) {
         if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED) {
 
             // Requesting the permission
-            ActivityCompat.requestPermissions(this, new String[] { permission }, requestCode);
-        }
-        else {
+            ActivityCompat.requestPermissions(this, new String[]{permission}, requestCode);
+        } else {
             Toast.makeText(this, "Permission already granted", Toast.LENGTH_SHORT).show();
         }
     }
+
     public boolean CheckPermission1(String perm) {
         int check = ContextCompat.checkSelfPermission(this, perm);
         return check == PackageManager.PERMISSION_GRANTED;

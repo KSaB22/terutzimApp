@@ -6,7 +6,7 @@ class Teruzim {
     private String tluna;
     private int upvotes;
 
-    public Teruzim(String reason, String tluna, String creator,  int upvotes) {
+    public Teruzim(String reason, String tluna, String creator, int upvotes) {
         this.reason = reason;
         this.creator = creator;
         this.tluna = tluna;
@@ -53,7 +53,7 @@ class Teruzim {
     }
 
     public void addUpvote(int place) {
-        this.upvotes = DataModel.teruzims.get(place).getUpvotes()+ 1;
+        this.upvotes = DataModel.teruzims.get(place).getUpvotes() + 1;
     }
 
 }
