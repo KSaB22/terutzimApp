@@ -20,6 +20,7 @@ public class LoadingActivity extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference dbteruzRef;
     DatabaseReference dbuserRef;
+    DatabaseReference dbrequstRef;
     public static Boolean first = true;
 
 
@@ -31,6 +32,7 @@ public class LoadingActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         dbteruzRef = database.getReference("teruzim");
         dbuserRef = database.getReference("users");
+        dbrequstRef = database.getReference("requests");
         dbteruzRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -58,11 +60,25 @@ public class LoadingActivity extends AppCompatActivity {
         dbuserRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                GenericTypeIndicator<ArrayList<User>> t = new GenericTypeIndicator<ArrayList<User>>() {
-                };
+                GenericTypeIndicator<ArrayList<User>> t = new GenericTypeIndicator<ArrayList<User>>() {};
                 ArrayList<User> fbUser = dataSnapshot.getValue(t);
                 DataModel.users.clear();
                 DataModel.users.addAll(fbUser);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        dbrequstRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                GenericTypeIndicator<ArrayList<Request>> t = new GenericTypeIndicator<ArrayList<Request>>() {};
+                ArrayList<Request> fbRequest = snapshot.getValue(t);
+                DataModel.requests.clear();
+                DataModel.requests.addAll(fbRequest);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivityForResult(intent, 0);
             }

@@ -8,6 +8,7 @@ public class DataModel {
 
     static public ArrayList<Teruzim> teruzims = new ArrayList<>();
     static public ArrayList<User> users = new ArrayList<>();
+    static public ArrayList<Request> requests = new ArrayList<>();
 
     public static void saveTeruzim() {
         FirebaseDatabase.getInstance().getReference("teruzim").setValue(DataModel.teruzims);
@@ -15,6 +16,10 @@ public class DataModel {
 
     public static void saveUsers() {
         FirebaseDatabase.getInstance().getReference("users").setValue(DataModel.users);
+    }
+
+    public static void saveRequests() {
+        FirebaseDatabase.getInstance().getReference("requests").setValue(DataModel.requests);
     }
 
 }
