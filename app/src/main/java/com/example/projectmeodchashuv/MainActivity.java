@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static ArrayList<String> subtitle = new ArrayList<String>();
     SharedPref sharedPref;
     AlertDialog.Builder builder;
-    public static ArrayList<Teruzim> mine = new ArrayList<>();
-    public static ArrayList<Teruzim> niggerBack = new ArrayList<>();
+    public static ArrayList<Teruzim> beenOnThisDevice = new ArrayList<>();
+    public static ArrayList<Teruzim> getBack = new ArrayList<>();
 
 
     @Override
@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //niggerBack.addAll(DataModel.teruzims);
 
         maintitle = new ArrayList<String>();
         subtitle = new ArrayList<String>();
@@ -74,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -113,19 +113,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             alert.setTitle("AlertDialogExample");
             alert.show();
 
-        } else if (R.id.suggest == item.getItemId()) {
+        }
+        else if (R.id.suggest == item.getItemId()) {
             Intent i = new Intent(this, SuggestingActivity.class);
             startActivity(i);
-        } else if (R.id.regi == item.getItemId()) {
+        }
+        /* else if (R.id.regi == item.getItemId()) {
             Intent i = new Intent(this, RegisterActivity.class);
             startActivity(i);
-        } else if (R.id.login == item.getItemId()) {
-            Intent i = new Intent(this, LoginActivity.class);
+        }*/
+        else if (R.id.login == item.getItemId()) {
+            if(sharedPref.GetUsername().equals("guest69")){
+                Intent i = new Intent(this, LoginActivity.class);
+                startActivity(i);
+            }
+            else{
+                sharedPref.SetUsername("guest69");
+                Toast.makeText(this, "you logged out", Toast.LENGTH_SHORT).show();
+            }
+        }
+        else if(R.id.request == item.getItemId()){
+            Intent i = new Intent(this, RequestingActivity.class);
             startActivity(i);
-        } else if (R.id.signout == item.getItemId()) {
+        }
+        /* else if (R.id.signout == item.getItemId()) {
             sharedPref.SetUsername("guest69");
             Toast.makeText(this, "You signed out", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 //        else if(R.id.smsSender == item.getItemId()){
 //            Intent i = new Intent(this, MessagingActivity.class);
 //            startActivity(i);
@@ -153,10 +167,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            niggerBack.clear();
-            niggerBack.addAll(DataModel.teruzims);
+            getBack.clear();
+            getBack.addAll(DataModel.teruzims);
             Teruzim teruz = new Teruzim(data.getStringExtra("REASON"), data.getStringExtra("TERUZ"), data.getStringExtra("CREATOR"), 0);
-            mine.add(teruz);
+            beenOnThisDevice.add(teruz);
             DataModel.teruzims.add(teruz);
             DataModel.saveTeruzim();
 

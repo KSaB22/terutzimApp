@@ -4,42 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewingActivity"
+    tools:context=".ViewRequestActivity"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/Teruz"
+        android:id="@+id/therequest"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="30dp"
-
-         />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:id="@+id/cr"
-
+        android:text="נדפקתי ועכשיו אני צריך תירוץ"
         />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/upvotes"
-        android:textSize="30dp"
-
+        android:textSize="20dp"
+        android:id="@+id/asker"
+        android:text="נוצר על ידי"
         />
-    <Button
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Upvote"
         android:textSize="30dp"
-        android:id="@+id/upbtn"
+        android:text="תגובות:"
+        android:id="@+id/comms"
         />
-    <Button
+    <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/share"
-        android:text="SHARE"
-        android:textSize="30dp"
-        />
+        android:id="@+id/anslv"/>
 </LinearLayout>

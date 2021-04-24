@@ -49,10 +49,15 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if(v== btn) {
             int j = getIntent().getIntExtra("PLACE", 0);
-            MainActivity.niggerBack.clear();
-            MainActivity.niggerBack.addAll(DataModel.teruzims);
+            MainActivity.getBack.clear();
+            MainActivity.getBack.addAll(DataModel.teruzims);
             DataModel.teruzims.get(j).addUpvote(j);
-            MainActivity.mine.add(DataModel.teruzims.get(j));
+            MainActivity.beenOnThisDevice.add(DataModel.teruzims.get(j));
+            ArrayList<String> temp = new ArrayList<>();
+            for (int i = 0; i<MainActivity.beenOnThisDevice.size(); i++){
+                temp.add(MainActivity.beenOnThisDevice.get(i).getTluna());
+            }
+            SharedPref.writeListInPref(this,temp);
             DataModel.saveTeruzim();
             up.setText(DataModel.teruzims.get(j).getUpvotes() + "upvote(s)");
             finish();

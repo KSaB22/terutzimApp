@@ -136,21 +136,21 @@ NotificationsService extends Service {
 
                 } else {
                     ArrayList<String> temp = new ArrayList<>();
-                    for (int i = 0; i < MainActivity.mine.size(); i++) {
-                        temp.add(MainActivity.mine.get(i).getTluna().toString());
+                    for (int i = 0; i < MainActivity.beenOnThisDevice.size(); i++) {
+                        temp.add(MainActivity.beenOnThisDevice.get(i).getTluna().toString());
                     }
                     SharedPref.writeListInPref(getApplicationContext(), temp);
-                    if (MainActivity.niggerBack != null)
-                        for (int i = 0; i < MainActivity.niggerBack.size(); i++) {
-                            if (isSame(newTeruz, MainActivity.niggerBack.get(i)))
+                    if (MainActivity.getBack != null)
+                        for (int i = 0; i < MainActivity.getBack.size(); i++) {
+                            if (isSame(newTeruz, MainActivity.getBack.get(i)))
                                 return;
                         }
                     boolean flag = true;
 
-                    for (int i = 0; i < MainActivity.mine.size() && flag; i++) {
+                    for (int i = 0; i < MainActivity.beenOnThisDevice.size() && flag; i++) {
                         Log.w("new", newTeruz.getTluna());
-                        Log.w("mine", MainActivity.mine.get(i).getTluna());
-                        if (newTeruz.getTluna().equals(MainActivity.mine.get(i).getTluna())) {
+                        Log.w("mine", MainActivity.beenOnThisDevice.get(i).getTluna());
+                        if (newTeruz.getTluna().equals(MainActivity.beenOnThisDevice.get(i).getTluna())) {
                             flag = false;
                         }
 
@@ -198,8 +198,8 @@ NotificationsService extends Service {
                     return;
                 } else {
                     boolean flag = true;
-                    for (int i = 0; i < MainActivity.mine.size(); i++) {
-                        if (flag && changedTeruz == MainActivity.mine.get(i))
+                    for (int i = 0; i < MainActivity.beenOnThisDevice.size(); i++) {
+                        if (flag && changedTeruz == MainActivity.beenOnThisDevice.get(i))
                             return;
                         flag = false;
                     }

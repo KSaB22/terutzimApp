@@ -12,10 +12,9 @@ public class Request {
     public Request() {
     }
 
-    public Request(String user, String log, ArrayList<Integer> idOfAnswers, String category) {
+    public Request(String user, String log, String category) {
         this.user = user;
         this.log = log;
-        this.idOfAnswers = idOfAnswers;
         this.category = category;
     }
 

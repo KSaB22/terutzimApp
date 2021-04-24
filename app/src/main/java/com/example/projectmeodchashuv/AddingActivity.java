@@ -44,6 +44,12 @@ public class AddingActivity extends AppCompatActivity implements View.OnClickLis
         lv = findViewById(R.id.lv);
         chooser = findViewById(R.id.btnch);
         chooser.setOnClickListener(this);
+
+        if(getIntent().getBooleanExtra("ISSET", false)){
+            chooser.setVisibility(View.GONE);
+            reason = getIntent().getStringExtra("CATEGORY");
+        }
+
         btn.setOnClickListener(this);
         ArrayList<String> maintitle = new ArrayList<String>();
         ArrayList<String> subtitle = new ArrayList<String>();

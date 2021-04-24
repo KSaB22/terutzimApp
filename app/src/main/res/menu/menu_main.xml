@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<item
-    android:id="@+id/action_changeTheme"
-    android:title="Change Theme"
-    android:orderInCategory="100"
-    app:showAsAction="never"
-    />
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <item
+        android:id="@+id/login"
+        android:title="Login"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_account"
+        />
+    <item
+        android:id="@+id/action_changeTheme"
+        android:title="Change Theme"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        />
     <item
         android:id="@+id/suggest"
         android:title="Suggest a category"
@@ -21,23 +29,12 @@
 
         -->
     <item
-        android:id="@+id/login"
-        android:title="Login"
+        android:id="@+id/request"
+        android:title="Requests"
         android:orderInCategory="100"
         app:showAsAction="never"
         />
-    <item
-        android:id="@+id/regi"
-        android:title="Register"
-        android:orderInCategory="100"
-        app:showAsAction="never"
-        />
-    <item
-        android:id="@+id/signout"
-        android:title="Sign Out"
-        android:orderInCategory="100"
-        app:showAsAction="never"
-        />
+
 
 
 </menu>
