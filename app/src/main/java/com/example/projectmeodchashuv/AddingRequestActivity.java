@@ -12,22 +12,16 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class AddingActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
-    EditText ETcreator, ETteruz;
+public class AddingRequestActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+
+    EditText ETteruz;
     Button btn, chooser;
+    SharedPref sharedPref;
+    MyListAdapter adapter;
     String reason = "";
     ListView lv;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference myRef = database.getReference("teruzim");
-    MyListAdapter adapter;
-    SharedPref sharedPref;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,27 +31,23 @@ public class AddingActivity extends AppCompatActivity implements View.OnClickLis
         else
             setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_adding);
+        setContentView(R.layout.activity_adding_request);
+
         ETteruz = findViewById(R.id.theline);
-        ETcreator = findViewById(R.id.creator);
         btn = findViewById(R.id.btn);
         lv = findViewById(R.id.lv);
         chooser = findViewById(R.id.btnch);
+
         chooser.setOnClickListener(this);
-
-        if(getIntent().getBooleanExtra("ISSET", false)){
-            chooser.setVisibility(View.GONE);
-            reason = getIntent().getStringExtra("CATEGORY");
-        }
-
         btn.setOnClickListener(this);
+
         ArrayList<String> maintitle = new ArrayList<String>();
         ArrayList<String> subtitle = new ArrayList<String>();
-
         maintitle.add("תירוצים לכל סיבה");
         subtitle.add("");
         maintitle.add("תירוצים לבית ספר");
         subtitle.add("");
+
         adapter = new MyListAdapter(this, maintitle, subtitle);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(this);
@@ -74,9 +64,8 @@ public class AddingActivity extends AppCompatActivity implements View.OnClickLis
                 Toast.makeText(this, "כנס  למשתמש כדי לפרסם תירוץ", Toast.LENGTH_SHORT).show();
             else {
                 Intent intent = new Intent();
-                intent.putExtra("REASON", reason);
-                intent.putExtra("TERUZ", ETteruz.getText().toString());
-                intent.putExtra("CREATOR", ETcreator.getText().toString());
+                intent.putExtra("CATEGORY", reason);
+                intent.putExtra("LOG", ETteruz.getText().toString());
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }
@@ -87,7 +76,7 @@ public class AddingActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View v, int i, long id) {
+    public void onItemClick(AdapterView<?> parent, View v, int i, long l) {
         switch (i) {
             case 0:
                 reason = "הכל";
@@ -99,5 +88,6 @@ public class AddingActivity extends AppCompatActivity implements View.OnClickLis
         lv.setVisibility(View.GONE);
         chooser.setVisibility(View.VISIBLE);
         Toast.makeText(this, "בחרת " + reason, Toast.LENGTH_SHORT).show();
+
     }
 }

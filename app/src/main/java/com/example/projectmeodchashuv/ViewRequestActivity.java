@@ -48,7 +48,7 @@ public class ViewRequestActivity extends AppCompatActivity implements AdapterVie
 
         log.setText(DataModel.requests.get(whichrequest).getLog());
         asker.setText("נוצר על ידי  " + DataModel.requests.get(whichrequest).getUser());
-        if(DataModel.requests.get(whichrequest).getIDofAnswers().isEmpty()){
+        if(DataModel.requests.get(whichrequest).getIDofAnswers() == null||  DataModel.requests.get(whichrequest).getIDofAnswers().isEmpty()){
             comms.setText("עדיין לא נכתבו תירוצים");
             lv.setVisibility(View.GONE);
         }
@@ -90,7 +90,14 @@ public class ViewRequestActivity extends AppCompatActivity implements AdapterVie
             MainActivity.beenOnThisDevice.add(teruz);
             DataModel.teruzims.add(teruz);
             DataModel.saveTeruzim();
-            DataModel.requests.get(whichrequest).getIDofAnswers().add(DataModel.teruzims.size()-1);
+            if(DataModel.requests.get(whichrequest).getIDofAnswers() != null)
+                DataModel.requests.get(whichrequest).getIDofAnswers().add(DataModel.teruzims.size()-1);
+            else{
+                ArrayList<Integer> temp = new ArrayList<>();
+                temp.add(DataModel.teruzims.size()-1);
+                DataModel.requests.get(whichrequest).setIDofAnswers(temp);
+            }
+
             DataModel.saveRequests();
             finish();
         }

@@ -15,6 +15,7 @@ public class Request {
     public Request(String user, String log, String category) {
         this.user = user;
         this.log = log;
+        this.idOfAnswers = new ArrayList<>();
         this.category = category;
     }
 
