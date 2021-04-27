@@ -11,29 +11,29 @@
         />
     <item
         android:id="@+id/action_changeTheme"
-        android:title="Change Theme"
+        android:title="שנה צבע נושא"
         android:orderInCategory="100"
         app:showAsAction="never"
         />
     <item
         android:id="@+id/suggest"
-        android:title="Suggest a category"
+        android:title="הצע קטגוריה חדשה"
         android:orderInCategory="100"
         app:showAsAction="never"
         />
-   <!-- <item
-        android:id="@+id/smsSender"
-        android:title="Send SmS to someone"
-        android:orderInCategory="100"
-        app:showAsAction="never"/>
-
-        -->
     <item
         android:id="@+id/request"
-        android:title="Requests"
+        android:title="בקשות לתירוצים"
         android:orderInCategory="100"
         app:showAsAction="never"
         />
+    <item
+        android:id="@+id/addterutz"
+        android:title="הוסף תירוץ"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        />
+
 
 
 

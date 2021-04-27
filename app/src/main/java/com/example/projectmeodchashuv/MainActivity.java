@@ -19,23 +19,23 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    Button btnadd;
     ListView lv;
     MyListAdapter adapter;
-    //ArrayList<Teruzim> teruzims;
     public static ArrayList<String> maintitle = new ArrayList<String>();
     public static ArrayList<String> subtitle = new ArrayList<String>();
     SharedPref sharedPref;
     AlertDialog.Builder builder;
     public static ArrayList<Teruzim> beenOnThisDevice = new ArrayList<>();
     public static ArrayList<Teruzim> getBack = new ArrayList<>();
+    static String tempusername;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         sharedPref = new SharedPref(this);
+        tempusername = sharedPref.GetUsername();
         if (sharedPref.LoadDarkModeState())
             setTheme(R.style.AppTheme_Dark);
         else
@@ -55,19 +55,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter = new MyListAdapter(this, maintitle, subtitle);
 
         builder = new AlertDialog.Builder(this);
-
-        btnadd = findViewById(R.id.btnadd);
         lv = findViewById(R.id.lv);
         lv.setAdapter(adapter);
-        btnadd.setOnClickListener(this);
         lv.setOnItemClickListener(this);
-        //bdika
-        if (LoadingActivity.first) {
-            LoadingActivity.first = false;
-        } else {
+
+
             Intent intent = new Intent(this, NotificationsService.class);
             startService(intent);
-        }
+
     }
 
     @Override
@@ -136,6 +131,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent i = new Intent(this, RequestingActivity.class);
             startActivity(i);
         }
+        else if(R.id.addterutz == item.getItemId()){
+            Intent intent = new Intent(this, AddingActivity.class);
+            startActivityForResult(intent, 0);
+        }
         /* else if (R.id.signout == item.getItemId()) {
             sharedPref.SetUsername("guest69");
             Toast.makeText(this, "You signed out", Toast.LENGTH_SHORT).show();
@@ -147,11 +146,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return true;
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(this, AddingActivity.class);
-        startActivityForResult(intent, 0);
-    }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View v, int i, long l) {
@@ -169,7 +163,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (resultCode == Activity.RESULT_OK) {
             getBack.clear();
             getBack.addAll(DataModel.teruzims);
-            Teruzim teruz = new Teruzim(data.getStringExtra("REASON"), data.getStringExtra("TERUZ"), data.getStringExtra("CREATOR"), 0);
+            Teruzim teruz = new Teruzim(data.getStringExtra("REASON"), data.getStringExtra("TERUZ"), tempusername, 0);
             beenOnThisDevice.add(teruz);
             DataModel.teruzims.add(teruz);
             DataModel.saveTeruzim();
