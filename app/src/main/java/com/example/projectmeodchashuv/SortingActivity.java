@@ -78,8 +78,8 @@ public class SortingActivity extends AppCompatActivity implements AdapterView.On
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            MainActivity.getBack.clear();
-            MainActivity.getBack.addAll(DataModel.teruzims);
+            MainActivity.getBackTeruzim.clear();
+            MainActivity.getBackTeruzim.addAll(DataModel.teruzims);
             Teruzim teruz = new Teruzim(data.getStringExtra("REASON"), data.getStringExtra("TERUZ"), tempusername, 0);
             MainActivity.beenOnThisDevice.add(teruz);
             DataModel.teruzims.add(teruz);

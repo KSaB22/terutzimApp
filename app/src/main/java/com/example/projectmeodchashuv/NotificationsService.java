@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.IBinder;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,6 +48,7 @@ NotificationsService extends Service {
     }
 
 
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -60,6 +60,7 @@ NotificationsService extends Service {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
                 Teruzim newTeruz = snapshot.getValue(Teruzim.class);
+                Request newRequest = snapshot.getValue(Request.class);
                 if (LoadingActivity.first) {
                     if (previousChildName != null) {
                         if (Integer.parseInt(previousChildName) == (DataModel.teruzims.size() - 2)) {
@@ -74,11 +75,19 @@ NotificationsService extends Service {
                         temp.add(MainActivity.beenOnThisDevice.get(i).getTluna().toString());
                     }
                     SharedPref.writeListInPref(getApplicationContext(), temp);
-                    if (MainActivity.getBack != null)
-                        for (int i = 0; i < MainActivity.getBack.size(); i++) {
-                            if (isSame(newTeruz, MainActivity.getBack.get(i)))
+                    if (MainActivity.getBackTeruzim != null)
+                        for (int i = 0; i < MainActivity.getBackTeruzim.size(); i++) {
+                            if (isSame(newTeruz, MainActivity.getBackTeruzim.get(i)))
                                 return;
                         }
+                    boolean requestflag = true;
+                    if(MainActivity.getBackRequests != null){
+                        for (int i = 0; i < MainActivity.getBackRequests.size(); i++){
+                            if(MainActivity.getBackRequests.get(i).getLog().equals(newRequest.getLog())){
+                                requestflag = false;
+                            }
+                        }
+                    }
                     boolean flag = true;
 
                     for (int i = 0; i < MainActivity.beenOnThisDevice.size() && flag; i++) {
@@ -87,7 +96,7 @@ NotificationsService extends Service {
                         }
 
                     }
-                    if (flag) {
+                    if (flag || requestflag) {
                         int NOTIFICATION_ID = 234;
                         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                         String CHANNEL_ID = "Terutz";

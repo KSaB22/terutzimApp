@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,7 +27,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     SharedPref sharedPref;
     AlertDialog.Builder builder;
     public static ArrayList<Teruzim> beenOnThisDevice = new ArrayList<>();
-    public static ArrayList<Teruzim> getBack = new ArrayList<>();
+    public static ArrayList<Request> getBackRequests = new ArrayList<>();
+    public static ArrayList<Teruzim> getBackTeruzim = new ArrayList<>();
     static String tempusername;
 
 
@@ -161,8 +161,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            getBack.clear();
-            getBack.addAll(DataModel.teruzims);
+            getBackTeruzim.clear();
+            getBackTeruzim.addAll(DataModel.teruzims);
             Teruzim teruz = new Teruzim(data.getStringExtra("REASON"), data.getStringExtra("TERUZ"), tempusername, 0);
             beenOnThisDevice.add(teruz);
             DataModel.teruzims.add(teruz);

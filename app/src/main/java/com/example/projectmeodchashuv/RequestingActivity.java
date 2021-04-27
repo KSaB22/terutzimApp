@@ -78,6 +78,8 @@ public class RequestingActivity extends AppCompatActivity implements  AdapterVie
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View v, int i, long l) {
+        MainActivity.getBackRequests.clear();
+        MainActivity.getBackRequests.addAll(DataModel.requests);
         Intent intent = new Intent(this, ViewRequestActivity.class);
         intent.putExtra("REQUEST", i);
         startActivity(intent);

@@ -49,8 +49,8 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         if(v== btn) {
             int j = getIntent().getIntExtra("PLACE", 0);
-            MainActivity.getBack.clear();
-            MainActivity.getBack.addAll(DataModel.teruzims);
+            MainActivity.getBackTeruzim.clear();
+            MainActivity.getBackTeruzim.addAll(DataModel.teruzims);
             DataModel.teruzims.get(j).addUpvote(j);
             MainActivity.beenOnThisDevice.add(DataModel.teruzims.get(j));
             ArrayList<String> temp = new ArrayList<>();
