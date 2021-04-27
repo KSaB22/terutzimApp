@@ -75,13 +75,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (R.id.action_changeTheme == item.getItemId()) {
-            //Uncomment the below code to Set the message and title from the strings.xml file
-            builder.setMessage(R.string.dialog_message).setTitle(R.string.dialog_title);
-
-            //Setting message manually and performing action on button click
-            builder.setMessage("Do you want to change the theme ?")
+            builder.setMessage("אתה בטוח שאתה רוצה לשנות את ערכת הנושא?")
+                    .setTitle("שינוי ערכות נושא")
                     .setCancelable(false)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    .setPositiveButton("כן", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             finish();
                             if (sharedPref.LoadDarkModeState()) {
@@ -94,11 +91,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                         }
                     })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    .setNegativeButton("לא", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             //  Action for 'NO' Button
                             dialog.cancel();
-                            Toast.makeText(getApplicationContext(), "you choose no action for alertbox",
+                            Toast.makeText(getApplicationContext(), "בחרת לא",
                                     Toast.LENGTH_SHORT).show();
                         }
                     });
