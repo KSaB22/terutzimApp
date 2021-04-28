@@ -101,8 +101,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     });
             //Creating dialog box
             AlertDialog alert = builder.create();
-            //Setting the title manually
-            alert.setTitle("AlertDialogExample");
             alert.show();
 
         }
@@ -121,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
             else{
                 sharedPref.SetUsername("guest69");
-                Toast.makeText(this, "you logged out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "התנתקת מהמשתמש", Toast.LENGTH_SHORT).show();
             }
         }
         else if(R.id.request == item.getItemId()){

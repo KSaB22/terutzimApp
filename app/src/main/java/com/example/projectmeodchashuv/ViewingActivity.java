@@ -34,7 +34,7 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
         btn.setOnClickListener(this);
         tluna.setText(DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getTluna());
         cr.setText(  "נוצר על ידי " + DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getCreator());
-        up.setText(DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getUpvotes() + "upvote(s)");
+        up.setText(DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getUpvotes() + " העלאות חיוביות");
         ArrayList<String> temp = SharedPref.readListFromPref(this);
         if(temp != null) {
             for (int i = 0; i < temp.size(); i++) {
@@ -59,7 +59,7 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
             }
             SharedPref.writeListInPref(this,temp);
             DataModel.saveTeruzim();
-            up.setText(DataModel.teruzims.get(j).getUpvotes() + "upvote(s)");
+            up.setText(DataModel.teruzims.get(j).getUpvotes() +  " העלאות חיוביות");
             finish();
         }
         else if(v == share){
@@ -73,7 +73,7 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
             try {
                 startActivity(whatsappIntent);
             } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(this,"Whatsapp have not been installed.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"ווצאפ לא מותקן", Toast.LENGTH_SHORT).show();
             }
             finish();
         }

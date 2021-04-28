@@ -10,7 +10,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="choose category"
+        android:text="בחר קטגוריה"
         android:id="@+id/btnch"/>
     <ListView
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="add"
+        android:text="הוסף"
         android:id="@+id/btn"
         />
 
