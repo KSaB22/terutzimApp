@@ -73,7 +73,10 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
             try {
                 startActivity(whatsappIntent);
             } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(this,"ווצאפ לא מותקן", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(this, MessagingActivity.class);
+                startActivity(i);
+                i.putExtra("TERUZ", DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getTluna());
+                finish();
             }
             finish();
         }
