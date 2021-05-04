@@ -35,7 +35,7 @@ NotificationsService extends Service {
     }
 
 
-    static boolean isSame(Teruzim m, Teruzim z) {
+    static boolean isSame(Teruz m, Teruz z) {
         if (!m.getTluna().equals(z.getTluna()))
             return false;
         else if (!m.getReason().equals(z.getReason()))
@@ -59,7 +59,7 @@ NotificationsService extends Service {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-                Teruzim newTeruz = snapshot.getValue(Teruzim.class);
+                Teruz newTeruz = snapshot.getValue(Teruz.class);
                 Request newRequest = snapshot.getValue(Request.class);
                 if (LoadingActivity.first) {
                     if (previousChildName != null) {
@@ -133,7 +133,7 @@ NotificationsService extends Service {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Teruzim changedTeruz = snapshot.getValue(Teruzim.class);
+                Teruz changedTeruz = snapshot.getValue(Teruz.class);
                 if (LoadingActivity.first) {
                     LoadingActivity.first = false;
                     return;

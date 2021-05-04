@@ -26,9 +26,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public static ArrayList<String> subtitle = new ArrayList<String>();
     SharedPref sharedPref;
     AlertDialog.Builder builder;
-    public static ArrayList<Teruzim> beenOnThisDevice = new ArrayList<>();
+    public static ArrayList<Teruz> beenOnThisDevice = new ArrayList<>();
     public static ArrayList<Request> getBackRequests = new ArrayList<>();
-    public static ArrayList<Teruzim> getBackTeruzim = new ArrayList<>();
+    public static ArrayList<Teruz> getBackTeruzim = new ArrayList<>();
     static String tempusername;
 
 
@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (resultCode == Activity.RESULT_OK) {
             getBackTeruzim.clear();
             getBackTeruzim.addAll(DataModel.teruzims);
-            Teruzim teruz = new Teruzim(data.getStringExtra("REASON"), data.getStringExtra("TERUZ"), tempusername, 0);
+            Teruz teruz = new Teruz(data.getStringExtra("REASON"), data.getStringExtra("TERUZ"), tempusername, 0);
             beenOnThisDevice.add(teruz);
             DataModel.teruzims.add(teruz);
             DataModel.saveTeruzim();

@@ -38,9 +38,9 @@ public class LoadingActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                GenericTypeIndicator<ArrayList<Teruzim>> t = new GenericTypeIndicator<ArrayList<Teruzim>>() {
+                GenericTypeIndicator<ArrayList<Teruz>> t = new GenericTypeIndicator<ArrayList<Teruz>>() {
                 };
-                ArrayList<Teruzim> fbTeruzim = dataSnapshot.getValue(t);
+                ArrayList<Teruz> fbTeruzim = dataSnapshot.getValue(t);
                 //GenericTypeIndicator<String> t = new GenericTypeIndicator<String>() {};
                 //String kaki = dataSnapshot.getValue(t);
                 //String kaki2 = kaki;

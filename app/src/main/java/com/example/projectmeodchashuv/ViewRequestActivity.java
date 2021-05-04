@@ -86,7 +86,7 @@ public class ViewRequestActivity extends AppCompatActivity implements AdapterVie
         if (resultCode == Activity.RESULT_OK) {
             MainActivity.getBackTeruzim.clear();
             MainActivity.getBackTeruzim.addAll(DataModel.teruzims);
-            Teruzim teruz = new Teruzim(data.getStringExtra("REASON"), data.getStringExtra("TERUZ"), data.getStringExtra("CREATOR"), 1);
+            Teruz teruz = new Teruz(data.getStringExtra("REASON"), data.getStringExtra("TERUZ"), data.getStringExtra("CREATOR"), 1);
             MainActivity.beenOnThisDevice.add(teruz);
             DataModel.teruzims.add(teruz);
             DataModel.saveTeruzim();

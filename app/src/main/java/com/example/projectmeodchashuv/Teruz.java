@@ -1,19 +1,19 @@
 package com.example.projectmeodchashuv;
 
-class Teruzim {
+class Teruz {
     private String reason;
     private String creator;
     private String tluna;
     private int upvotes;
 
-    public Teruzim(String reason, String tluna, String creator, int upvotes) {
+    public Teruz(String reason, String tluna, String creator, int upvotes) {
         this.reason = reason;
         this.creator = creator;
         this.tluna = tluna;
         this.upvotes = upvotes;
     }
 
-    public Teruzim() {
+    public Teruz() {
         this.reason = "000000";
         this.creator = "mmmmm";
         this.tluna = "000000000";

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class DataModel {
 
-    static public ArrayList<Teruzim> teruzims = new ArrayList<>();
+    static public ArrayList<Teruz> teruzims = new ArrayList<>();
     static public ArrayList<User> users = new ArrayList<>();
     static public ArrayList<Request> requests = new ArrayList<>();
 
