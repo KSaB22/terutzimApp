@@ -11,7 +11,7 @@
         android:id="@+id/btpick_contact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Pick number from contacts list"
+        android:text="בחר איש קשר"
         android:layout_gravity="center"
         android:textSize="30dp"
         />
@@ -19,7 +19,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Send"
+        android:text="שלח"
         android:id="@+id/snd"
         android:onClick="onSend"
         android:textSize="30dp"/>
@@ -27,14 +27,14 @@
         android:id="@+id/storage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SMS PERMISSION"
+        android:text="אישור לSMS"
         android:textSize="30dp"
         android:padding="8dp" />
     <Button
         android:id="@+id/kaki"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CONTACTS PERMISSION"
+        android:text="אישור לאנשי קשר"
         android:textSize="30dp"
         android:padding="8dp" />
 

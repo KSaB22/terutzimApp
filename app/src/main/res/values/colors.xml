@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- original color palette -->
-    <color name="colorPrimary">#0046FF</color>
-    <color name="colorPrimaryDark">#0045F5</color>
+    <color name="colorPrimary">#5583FD</color>
+    <color name="colorPrimaryDark">#4F75D6</color>
     <color name="colorPrimaryLight">#FFE0B2</color>
     <!-- accent color: red -->
     <color name="colorAccent">#FF5252</color>
@@ -13,7 +13,7 @@
     <color name="textColorPrimaryInverse">#DEFFFFFF</color>
     <color name="textColorSecondaryInverse">#9E9E9E</color>
     <!-- alternative color palette -->
-    <color name="colorPrimaryInverse">#0046FF</color>
-    <color name="colorPrimaryDarkInverse">#0045F5</color>
+    <color name="colorPrimaryInverse">#5583FD</color>
+    <color name="colorPrimaryDarkInverse">#4F75D6</color>
     <color name="colorAccentInverse">#FF5252</color>
 </resources>
