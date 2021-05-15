@@ -13,7 +13,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     ListView lv;
+    TextView maintxt;
     MyListAdapter adapter;
     public static ArrayList<String> maintitle = new ArrayList<String>();
     public static ArrayList<String> subtitle = new ArrayList<String>();
@@ -30,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public static ArrayList<Request> getBackRequests = new ArrayList<>();
     public static ArrayList<Teruz> getBackTeruzim = new ArrayList<>();
     static String tempusername;
+    int counter = 0;
+
 
 
     @Override
@@ -51,6 +56,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         maintitle.add("תירוצים לבית ספר");
         subtitle.add("");
 
+        maintxt = findViewById(R.id.maintxt);
+        maintxt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                counter++;
+                if(counter == 13)
+                    LoadingActivity.ee = true;
+            }
+        });
 
         adapter = new MyListAdapter(this, maintitle, subtitle);
 

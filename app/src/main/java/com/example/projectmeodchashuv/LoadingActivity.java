@@ -22,6 +22,7 @@ public class LoadingActivity extends AppCompatActivity {
     DatabaseReference dbuserRef;
     DatabaseReference dbrequstRef;
     public static Boolean first = true;
+    public static Boolean ee = false;
 
 
     @Override

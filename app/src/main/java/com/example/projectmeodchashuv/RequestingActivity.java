@@ -41,7 +41,10 @@ public class RequestingActivity extends AppCompatActivity implements  AdapterVie
             maintitle.add(DataModel.requests.get(i).getLog());
             subtitle.add("בקטגורית " + DataModel.requests.get(i).getCategory());
         }
-
+        if(LoadingActivity.ee) {
+         maintitle.add("לא סיימתי עדיין את הפרויקט");
+         subtitle.add("הלך עליי");
+        }
         adapter = new MyListAdapter(this, maintitle, subtitle);
 
 
@@ -78,11 +81,16 @@ public class RequestingActivity extends AppCompatActivity implements  AdapterVie
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View v, int i, long l) {
-        MainActivity.getBackRequests.clear();
-        MainActivity.getBackRequests.addAll(DataModel.requests);
-        Intent intent = new Intent(this, ViewRequestActivity.class);
-        intent.putExtra("REQUEST", i);
-        startActivity(intent);
-        finish();
+        if(subtitle.get(i).equals("הלך עליי") ){
+            Intent eeIntent = new Intent(this, EasterEggActivity.class);
+            startActivity(eeIntent);
+        }
+        else {
+            MainActivity.getBackRequests.clear();
+            MainActivity.getBackRequests.addAll(DataModel.requests);
+            Intent intent = new Intent(this, ViewRequestActivity.class);
+            intent.putExtra("REQUEST", i);
+            startActivity(intent);
+        }
     }
 }
