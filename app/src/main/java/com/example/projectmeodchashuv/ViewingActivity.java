@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -52,10 +51,10 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
             MainActivity.getBackTeruzim.clear();
             MainActivity.getBackTeruzim.addAll(DataModel.teruzims);
             DataModel.teruzims.get(j).addUpvote(j);
-            MainActivity.beenOnThisDevice.add(DataModel.teruzims.get(j));
+            MainActivity.teruzimOnThisDevice.add(DataModel.teruzims.get(j));
             ArrayList<String> temp = new ArrayList<>();
-            for (int i = 0; i<MainActivity.beenOnThisDevice.size(); i++){
-                temp.add(MainActivity.beenOnThisDevice.get(i).getTluna());
+            for (int i = 0; i<MainActivity.teruzimOnThisDevice.size(); i++){
+                temp.add(MainActivity.teruzimOnThisDevice.get(i).getTluna());
             }
             SharedPref.writeListInPref(this,temp);
             DataModel.saveTeruzim();

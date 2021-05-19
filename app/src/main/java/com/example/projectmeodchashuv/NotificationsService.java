@@ -71,8 +71,8 @@ NotificationsService extends Service {
 
                 } else {
                     ArrayList<String> temp = new ArrayList<>();
-                    for (int i = 0; i < MainActivity.beenOnThisDevice.size(); i++) {
-                        temp.add(MainActivity.beenOnThisDevice.get(i).getTluna().toString());
+                    for (int i = 0; i < MainActivity.teruzimOnThisDevice.size(); i++) {
+                        temp.add(MainActivity.teruzimOnThisDevice.get(i).getTluna().toString());
                     }
                     SharedPref.writeListInPref(getApplicationContext(), temp);
                     if (MainActivity.getBackTeruzim != null)
@@ -84,14 +84,22 @@ NotificationsService extends Service {
                     if(MainActivity.getBackRequests != null){
                         for (int i = 0; i < MainActivity.getBackRequests.size(); i++){
                             if(MainActivity.getBackRequests.get(i).getLog().equals(newRequest.getLog())){
-                                requestflag = false;
+                                return;
                             }
                         }
                     }
+
+                    for (int i = 0; i < MainActivity.requestsOnThisDevice.size() && requestflag; i++) {
+                        if (newRequest.getLog().equals(MainActivity.requestsOnThisDevice.get(i).getLog())) {
+                            requestflag = false;
+                        }
+
+                    }
+
                     boolean flag = true;
 
-                    for (int i = 0; i < MainActivity.beenOnThisDevice.size() && flag; i++) {
-                        if (newTeruz.getTluna().equals(MainActivity.beenOnThisDevice.get(i).getTluna())) {
+                    for (int i = 0; i < MainActivity.teruzimOnThisDevice.size() && flag; i++) {
+                        if (newTeruz.getTluna().equals(MainActivity.teruzimOnThisDevice.get(i).getTluna())) {
                             flag = false;
                         }
 
@@ -133,49 +141,8 @@ NotificationsService extends Service {
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                Teruz changedTeruz = snapshot.getValue(Teruz.class);
-                if (LoadingActivity.first) {
-                    LoadingActivity.first = false;
-                    return;
-                } else {
-                    boolean flag = true;
-                    for (int i = 0; i < MainActivity.beenOnThisDevice.size(); i++) {
-                        if (flag && changedTeruz == MainActivity.beenOnThisDevice.get(i))
-                            return;
-                        flag = false;
-                    }
-                    if (flag) {
-                        int NOTIFICATION_ID = 234;
-                        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                        String CHANNEL_ID = "Terutz";
 
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                            CharSequence name = "Terutz";
-                            String Description = "Terutzim channel";
-                            int importance = NotificationManager.IMPORTANCE_HIGH;
-                            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-                            mChannel.setDescription(Description);
-                            mChannel.enableLights(true);
-                            mChannel.setLightColor(Color.RED);
-                            mChannel.enableVibration(true);
-                            mChannel.setShowBadge(true);
-                            notificationManager.createNotificationChannel(mChannel);
-                        }
 
-                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                                .setSmallIcon(R.mipmap.ic_launcher)
-                                .setContentTitle("Terutz has been changed")
-                                .setContentText(changedTeruz.getTluna());
-
-                        Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
-                        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
-                        stackBuilder.addParentStack(MainActivity.class);
-                        stackBuilder.addNextIntent(resultIntent);
-                        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-                        builder.setContentIntent(resultPendingIntent);
-                        notificationManager.notify(NOTIFICATION_ID, builder.build());
-                    }
-                }
             }
 
             @Override

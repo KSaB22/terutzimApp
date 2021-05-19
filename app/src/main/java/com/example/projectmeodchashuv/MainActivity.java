@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +28,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public static ArrayList<String> subtitle = new ArrayList<String>();
     SharedPref sharedPref;
     AlertDialog.Builder builder;
-    public static ArrayList<Teruz> beenOnThisDevice = new ArrayList<>();
+    public static ArrayList<Teruz> teruzimOnThisDevice = new ArrayList<>();
+    public static ArrayList<Request> requestsOnThisDevice = new ArrayList<>();
     public static ArrayList<Request> getBackRequests = new ArrayList<>();
     public static ArrayList<Teruz> getBackTeruzim = new ArrayList<>();
     static String tempusername;
@@ -54,6 +54,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         maintitle.add("תירוצים לכל סיבה");
         subtitle.add("");
         maintitle.add("תירוצים לבית ספר");
+        subtitle.add("");
+        maintitle.add("תירוצים להורים");
+        subtitle.add("");
+        maintitle.add("תירוצים לספורט");
+        subtitle.add("");
+        maintitle.add("תירוצים לצבא");
+        subtitle.add("");
+        maintitle.add("תירוצים להברזה ממפגשים");
         subtitle.add("");
 
         maintxt = findViewById(R.id.maintxt);
@@ -159,10 +167,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View v, int i, long l) {
         Intent intent = new Intent(this, SortingActivity.class);
-        if (i == 0)
-            intent.putExtra("REASON", "הכל");
-        else
-            intent.putExtra("REASON", "בית ספר");
+        switch (i){
+            case 0:
+                intent.putExtra("REASON", "הכל");
+                break;
+            case 1:
+                intent.putExtra("REASON", "בית ספר");
+                break;
+            case 2:
+                intent.putExtra("REASON", "הורים");
+                break;
+            case 3:
+                intent.putExtra("REASON", "ספורט");
+                break;
+            case 4:
+                intent.putExtra("REASON", "צבא");
+                break;
+            case 5:
+                intent.putExtra("REASON", "הברזה");
+                break;
+        }
         startActivity(intent);
     }
 
@@ -173,7 +197,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             getBackTeruzim.clear();
             getBackTeruzim.addAll(DataModel.teruzims);
             Teruz teruz = new Teruz(data.getStringExtra("REASON"), data.getStringExtra("TERUZ"), tempusername, 0);
-            beenOnThisDevice.add(teruz);
+            teruzimOnThisDevice.add(teruz);
             DataModel.teruzims.add(teruz);
             DataModel.saveTeruzim();
 

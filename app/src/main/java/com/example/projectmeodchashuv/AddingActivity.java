@@ -58,6 +58,14 @@ public class AddingActivity extends AppCompatActivity implements View.OnClickLis
         subtitle.add("");
         maintitle.add("תירוצים לבית ספר");
         subtitle.add("");
+        maintitle.add("תירוצים להורים");
+        subtitle.add("");
+        maintitle.add("תירוצים לספורט");
+        subtitle.add("");
+        maintitle.add("תירוצים לצבא");
+        subtitle.add("");
+        maintitle.add("תירוצים להברזה ממפגשים");
+        subtitle.add("");
         adapter = new MyListAdapter(this, maintitle, subtitle);
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(this);
@@ -94,6 +102,18 @@ public class AddingActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case 1:
                 reason = "בית ספר";
+                break;
+            case 2:
+                reason = "הורים";
+                break;
+            case 3:
+                reason =  "ספורט";
+                break;
+            case 4:
+                reason = "צבא";
+                break;
+            case 5:
+                reason =  "הברזה";
                 break;
         }
         lv.setVisibility(View.GONE);

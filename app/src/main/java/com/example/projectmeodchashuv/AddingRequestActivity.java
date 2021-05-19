@@ -84,6 +84,18 @@ public class AddingRequestActivity extends AppCompatActivity implements View.OnC
             case 1:
                 reason = "בית ספר";
                 break;
+            case 2:
+                reason = "הורים";
+                break;
+            case 3:
+                reason =  "ספורט";
+                break;
+            case 4:
+                reason = "צבא";
+                break;
+            case 5:
+                reason =  "הברזה";
+                break;
         }
         lv.setVisibility(View.GONE);
         chooser.setVisibility(View.VISIBLE);

@@ -72,10 +72,9 @@ public class RequestingActivity extends AppCompatActivity implements  AdapterVie
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK){
-
             DataModel.requests.add(new Request(tempusername,data.getStringExtra("LOG"),data.getStringExtra("CATEGORY")));
+            MainActivity.requestsOnThisDevice.add(new Request(tempusername,data.getStringExtra("LOG"),data.getStringExtra("CATEGORY")));
             DataModel.saveRequests();
-            finish();
         }
     }
 

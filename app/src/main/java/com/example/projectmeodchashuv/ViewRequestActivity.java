@@ -87,7 +87,7 @@ public class ViewRequestActivity extends AppCompatActivity implements AdapterVie
             MainActivity.getBackTeruzim.clear();
             MainActivity.getBackTeruzim.addAll(DataModel.teruzims);
             Teruz teruz = new Teruz(data.getStringExtra("REASON"), data.getStringExtra("TERUZ"), data.getStringExtra("CREATOR"), 1);
-            MainActivity.beenOnThisDevice.add(teruz);
+            MainActivity.teruzimOnThisDevice.add(teruz);
             DataModel.teruzims.add(teruz);
             DataModel.saveTeruzim();
             if(DataModel.requests.get(whichrequest).getIDofAnswers() != null)
