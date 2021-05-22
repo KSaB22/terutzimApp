@@ -40,6 +40,7 @@ public class EasterEggActivity extends AppCompatActivity implements View.OnClick
     /**
      * לוקחת מהאתר את התירוץ שרשום שם כל פעם שקוראים לה
      * @link http://programmingexcuses.com
+     * @see org.jsoup:jsoup:1.11.1
      */
     private void getBodyText() {
         new Thread(new Runnable() {
@@ -48,7 +49,7 @@ public class EasterEggActivity extends AppCompatActivity implements View.OnClick
                 final StringBuilder builder = new StringBuilder();
 
                 try {
-                    String url="http://programmingexcuses.com";//your website url
+                    String url="http://programmingexcuses.com";
                     Document doc = Jsoup.connect(url).get();
 
                     Element body = doc.body();
