@@ -2,8 +2,14 @@ package com.example.projectmeodchashuv;
 
 import java.util.ArrayList;
 
-public class Request {
 
+public class Request {
+    /**
+     * @param user שם המשתמש שפרסם
+     * @param log הבקשה
+     * @param idOfAnswers כל התירוצים שהם צשובה לבקשה
+     * @param category לאיזה קטגוריה משתייחת הבקשה
+     */
     private String user;
     private String log;
     private ArrayList<Integer> idOfAnswers;

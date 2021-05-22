@@ -62,9 +62,9 @@ public class ViewingActivity extends AppCompatActivity implements View.OnClickLi
             finish();
         }
         else if(v == share){
-            //Intent i = new Intent(this, MessagingActivity.class);
-            //i.putExtra("TERUZ", DataModel.teruzims.get(getIntent().getIntExtra("PLACE",0)).getTluna() );
-            //startActivity(i);
+            /**
+             * שולח למישהו בווצאפ אלא אם אין ווצאפ ואז שולח את המשתמש לMessagingActivity
+             */
             Intent whatsappIntent = new Intent(Intent.ACTION_SEND);
             whatsappIntent.setType("text/plain");
             whatsappIntent.setPackage("com.whatsapp");

@@ -56,6 +56,9 @@ public class SuggestingActivity extends AppCompatActivity implements View.OnClic
 
     }
 
+    /**
+     *see MessagingActivity.checkPermission()
+     */
     public void checkPermission(String permission, int requestCode) {
         if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED) {
 
@@ -66,6 +69,9 @@ public class SuggestingActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    /**
+     *see MessagingActivity.CheckPermission1()
+     */
     public boolean CheckPermission1(String perm) {
         int check = ContextCompat.checkSelfPermission(this, perm);
         return check == PackageManager.PERMISSION_GRANTED;

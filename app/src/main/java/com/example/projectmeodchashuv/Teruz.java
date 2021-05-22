@@ -1,6 +1,12 @@
 package com.example.projectmeodchashuv;
 
 class Teruz {
+    /**
+     * @param reason קטגוריה
+     * @param creator המשתמש שיצר את התירוץ
+     * @param tluna התירוץ(כן אני יודע שזה מבלבל)
+     * @param upvotes העלאות חיוביות
+     */
     private String reason;
     private String creator;
     private String tluna;

@@ -29,6 +29,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         submit.setOnClickListener(this);
     }
 
+    /**
+     *  רושם אותך כמשתמ חדש
+     * @param v איזה כפתור נלחץ
+     */
     @Override
     public void onClick(View v) {
         if (name.getText().toString().equals("") || pass.getText().toString().equals("")) {

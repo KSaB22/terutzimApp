@@ -1,6 +1,10 @@
 package com.example.projectmeodchashuv;
 
 public class User {
+    /**
+     * @param username שפ משתמש
+     * @param password סיסמה
+     */
     private String username;
     private String password;
 

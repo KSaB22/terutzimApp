@@ -18,12 +18,19 @@ public class SharedPref {
         mySharedPrefrences = context.getSharedPreferences("filename", context.MODE_PRIVATE);
     }
 
+    /**
+     * משנה את הערך state
+     * @param state הערך שאומר אם המשתמש רוצה מצב לילה או לא
+     */
     public void setDarkModeState(boolean state) {
         SharedPreferences.Editor editor = mySharedPrefrences.edit();
         editor.putBoolean("DarkMode", state);
         editor.commit();
     }
 
+    /**
+     * @return state
+     */
     public boolean LoadDarkModeState() {
         boolean state = mySharedPrefrences.getBoolean("DarkMode", false);
         return state;
@@ -31,8 +38,14 @@ public class SharedPref {
 
     private static final String LIST_KEY = "list_key100";
 
+    /**
+     * מכניס את כל התירוצים שעשו להם אפווט בטלפון זה
+     * @link    https://www.youtube.com/watch?v=TsASX0ZK9ak
+     * @param context
+     * @param list רשימה של התירוצים שעשו להם אפווט בטלפון זה
+     */
     public static void writeListInPref(Context context, ArrayList<String> list) {
-        Gson gson = new Gson(); // copied from an indian on YT https://www.youtube.com/watch?v=TsASX0ZK9ak
+        Gson gson = new Gson();
         String jsonString = gson.toJson(list);
 
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
@@ -41,6 +54,11 @@ public class SharedPref {
         editor.apply();
     }
 
+    /**
+     *
+     * @param context
+     * @return list
+     */
     public static ArrayList<String> readListFromPref(Context context) {
         SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
         String jsonString = pref.getString(LIST_KEY, "");
@@ -52,12 +70,19 @@ public class SharedPref {
         return list;
     }
 
+    /**
+     * שומר את שם המשתמש שהוא מחמובר אליו
+     * @param username שם המשתמש
+     */
     public void SetUsername(String username) {
         SharedPreferences.Editor editor = mySharedPrefrences.edit();
         editor.putString("username", username);
         editor.commit();
     }
 
+    /**
+     * @return username
+     */
     public String GetUsername() {
         String user = mySharedPrefrences.getString("username", "guest69");
         return user;
