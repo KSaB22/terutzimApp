@@ -62,119 +62,124 @@ NotificationsService extends Service {
 
         dbteruzRef = database.getReference("teruzim");
         dbrequstRef = database.getReference("requests");
-        /**
-         * בודקת אם נוצר תירוץ חדש ואם הוא לא נוצר על הטלפון הזה היא שולחת התראה על זה
-         */
-        dbteruzRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                GenericTypeIndicator<ArrayList<Teruz>> t = new GenericTypeIndicator<ArrayList<Teruz>>() {};
-                ArrayList<Teruz> newTeruz = snapshot.getValue(t);
-                ArrayList<String> temp = new ArrayList<>();
-                for (int i = 0; i < MainActivity.teruzimOnThisDevice.size(); i++) {
-                    temp.add(MainActivity.teruzimOnThisDevice.get(i).getTluna());
-                }
-                SharedPref.writeListInPref(getApplicationContext(), temp);
+        if(!LoadingActivity.first) {
+            /**
+             * בודקת אם נוצר תירוץ חדש ואם הוא לא נוצר על הטלפון הזה היא שולחת התראה על זה
+             */
+            dbteruzRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    GenericTypeIndicator<ArrayList<Teruz>> t = new GenericTypeIndicator<ArrayList<Teruz>>() {
+                    };
+                    ArrayList<Teruz> newTeruz = snapshot.getValue(t);
+                    ArrayList<String> temp = new ArrayList<>();
+                    for (int i = 0; i < MainActivity.teruzimOnThisDevice.size(); i++) {
+                        temp.add(MainActivity.teruzimOnThisDevice.get(i).getTluna());
+                    }
+                    SharedPref.writeListInPref(getApplicationContext(), temp);
 
-                boolean flag = true;
-                for (int i = 0; i < MainActivity.teruzimOnThisDevice.size() && flag; i++) {
-                    if (newTeruz.get(i).getTluna().equals(MainActivity.teruzimOnThisDevice.get(i).getTluna())) {
-                        flag = false;
+                    boolean flag = true;
+                    for (int i = 0; i < MainActivity.teruzimOnThisDevice.size() && flag; i++) {
+                        if (newTeruz.get(i).getTluna().equals(MainActivity.teruzimOnThisDevice.get(i).getTluna())) {
+                            flag = false;
+                        }
+                    }
+                    if (flag) {
+                        int NOTIFICATION_ID = 234;
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        String CHANNEL_ID = "Terutz";
+
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                            CharSequence name = "Terutz";
+                            String Description = "Terutzim channel";
+                            int importance = NotificationManager.IMPORTANCE_HIGH;
+                            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+                            mChannel.setDescription(Description);
+                            mChannel.enableLights(true);
+                            mChannel.setLightColor(Color.RED);
+                            mChannel.enableVibration(true);
+                            mChannel.setShowBadge(true);
+                            notificationManager.createNotificationChannel(mChannel);
+                        }
+
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                                .setSmallIcon(R.mipmap.ic_launcher)
+                                .setContentTitle("Something happened, Come Check it out!")
+                                .setContentText(newTeruz.get(newTeruz.size() - 1).getTluna());
+
+                        Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
+                        stackBuilder.addParentStack(MainActivity.class);
+                        stackBuilder.addNextIntent(resultIntent);
+                        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                        builder.setContentIntent(resultPendingIntent);
+                        notificationManager.notify(NOTIFICATION_ID, builder.build());
+
                     }
                 }
-                if(flag){
-                    int NOTIFICATION_ID = 234;
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    String CHANNEL_ID = "Terutz";
 
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                        CharSequence name = "Terutz";
-                        String Description = "Terutzim channel";
-                        int importance = NotificationManager.IMPORTANCE_HIGH;
-                        NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-                        mChannel.setDescription(Description);
-                        mChannel.enableLights(true);
-                        mChannel.setLightColor(Color.RED);
-                        mChannel.enableVibration(true);
-                        mChannel.setShowBadge(true);
-                        notificationManager.createNotificationChannel(mChannel);
-                    }
-
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                            .setSmallIcon(R.mipmap.ic_launcher)
-                            .setContentTitle("Something happened, Come Check it out!")
-                            .setContentText(newTeruz.get(newTeruz.size()-1).getTluna());
-
-                    Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
-                    TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
-                    stackBuilder.addParentStack(MainActivity.class);
-                    stackBuilder.addNextIntent(resultIntent);
-                    PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-                    builder.setContentIntent(resultPendingIntent);
-                    notificationManager.notify(NOTIFICATION_ID, builder.build());
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            }
+            });
+            /**
+             * אותו דבר רק לבקשות
+             */
+            dbrequstRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    GenericTypeIndicator<ArrayList<Request>> r = new GenericTypeIndicator<ArrayList<Request>>() {
+                    };
+                    ArrayList<Request> newRequest = snapshot.getValue(r);
+                    boolean requestflag = true;
+                    for (int i = 0; i < MainActivity.requestsOnThisDevice.size() && requestflag; i++) {
+                        if (newRequest.get(i).getLog().equals(MainActivity.requestsOnThisDevice.get(i).getLog())) {
+                            requestflag = false;
+                        }
+                    }
+                    if (requestflag) {
+                        int NOTIFICATION_ID = 234;
+                        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                        String CHANNEL_ID = "Terutz";
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                            CharSequence name = "Terutz";
+                            String Description = "Terutzim channel";
+                            int importance = NotificationManager.IMPORTANCE_HIGH;
+                            NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
+                            mChannel.setDescription(Description);
+                            mChannel.enableLights(true);
+                            mChannel.setLightColor(Color.RED);
+                            mChannel.enableVibration(true);
+                            mChannel.setShowBadge(true);
+                            notificationManager.createNotificationChannel(mChannel);
+                        }
 
-            }
-        });
-        /**
-         * אותו דבר רק לבקשות
-         */
-        dbrequstRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                GenericTypeIndicator<ArrayList<Request>> r = new GenericTypeIndicator<ArrayList<Request>>() {};
-                ArrayList<Request> newRequest = snapshot.getValue(r);
-                boolean requestflag = true;
-                for (int i = 0; i < MainActivity.requestsOnThisDevice.size() && requestflag; i++) {
-                    if (newRequest.get(i).getLog().equals(MainActivity.requestsOnThisDevice.get(i).getLog())) {
-                        requestflag = false;
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
+                                .setSmallIcon(R.mipmap.ic_launcher)
+                                .setContentTitle("Something happened, Come Check it out!")
+                                .setContentText(newRequest.get(newRequest.size() - 1).getLog());
+
+                        Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
+                        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
+                        stackBuilder.addParentStack(MainActivity.class);
+                        stackBuilder.addNextIntent(resultIntent);
+                        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+                        builder.setContentIntent(resultPendingIntent);
+                        notificationManager.notify(NOTIFICATION_ID, builder.build());
+
                     }
                 }
-                if(requestflag){
-                    int NOTIFICATION_ID = 234;
-                    NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                    String CHANNEL_ID = "Terutz";
 
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                        CharSequence name = "Terutz";
-                        String Description = "Terutzim channel";
-                        int importance = NotificationManager.IMPORTANCE_HIGH;
-                        NotificationChannel mChannel = new NotificationChannel(CHANNEL_ID, name, importance);
-                        mChannel.setDescription(Description);
-                        mChannel.enableLights(true);
-                        mChannel.setLightColor(Color.RED);
-                        mChannel.enableVibration(true);
-                        mChannel.setShowBadge(true);
-                        notificationManager.createNotificationChannel(mChannel);
-                    }
-
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-                            .setSmallIcon(R.mipmap.ic_launcher)
-                            .setContentTitle("Something happened, Come Check it out!")
-                            .setContentText(newRequest.get(newRequest.size()-1).getLog());
-
-                    Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
-                    TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplicationContext());
-                    stackBuilder.addParentStack(MainActivity.class);
-                    stackBuilder.addNextIntent(resultIntent);
-                    PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-                    builder.setContentIntent(resultPendingIntent);
-                    notificationManager.notify(NOTIFICATION_ID, builder.build());
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
+            });
+        }
+        else
+            LoadingActivity.first = false;
 
         return super.onStartCommand(intent, flags, startId);
     }
