@@ -35,20 +35,20 @@ public class LoadingActivity extends AppCompatActivity {
         dbuserRef = database.getReference("users");
         dbrequstRef = database.getReference("requests");
         dbteruzRef.addValueEventListener(new ValueEventListener() {
+            /**
+             *
+             * This method is called once with the initial value and again
+             * whenever data at this location is updated.
+             * @param dataSnapshot
+             */
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
                 GenericTypeIndicator<ArrayList<Teruz>> t = new GenericTypeIndicator<ArrayList<Teruz>>() {
                 };
                 ArrayList<Teruz> fbTeruzim = dataSnapshot.getValue(t);
-                //GenericTypeIndicator<String> t = new GenericTypeIndicator<String>() {};
-                //String kaki = dataSnapshot.getValue(t);
-                //String kaki2 = kaki;
                 DataModel.teruzims.clear();
 
                 DataModel.teruzims.addAll(fbTeruzim);
-
 
             }
 
@@ -65,6 +65,7 @@ public class LoadingActivity extends AppCompatActivity {
                 ArrayList<User> fbUser = dataSnapshot.getValue(t);
                 DataModel.users.clear();
                 DataModel.users.addAll(fbUser);
+
 
             }
 

@@ -31,6 +31,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         submit.setOnClickListener(this);
     }
 
+    /**
+     * בודקת אם הגל תקני ןאם כן יוצרת מתחברת למשתמש אם לא מודיע שיש טעות
+     * או שולחת לעמוד הרשמות
+     * @param v
+     */
     @Override
     public void onClick(View v) {
         if(v == submit)

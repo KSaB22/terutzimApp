@@ -37,6 +37,10 @@ public class EasterEggActivity extends AppCompatActivity implements View.OnClick
         getBodyText();
     }
 
+    /**
+     * לוקחת מהאתר את התירוץ שרשום שם כל פעם שקוראים לה
+     * @link http://programmingexcuses.com
+     */
     private void getBodyText() {
         new Thread(new Runnable() {
             @Override

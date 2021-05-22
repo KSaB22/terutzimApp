@@ -61,6 +61,11 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    /**
+     * שולחת sms במקרה והכל תקין
+     * אם הוא לא בחר איש קשר או איכשהו הגיע בלי תירוץ זה לא יתן לו לשלוח
+     * @param v
+     */
     public void onSend(View v) {
         String message = getIntent().getStringExtra("TERUZ");
         if (pnum == null || (pnum.length() < 2) || message == null || message.length() < 1) {
@@ -77,11 +82,20 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+    /**
+     * @param perm איזה אפשרות
+     * @return check מחזיר טרו אם המשתמש הרשה שימוש
+     */
     public boolean CheckPermission1(String perm) {
         int check = ContextCompat.checkSelfPermission(this, perm);
         return check == PackageManager.PERMISSION_GRANTED;
     }
 
+    /**
+     * מבקש גישה
+     * @param permission אפשרות
+     * @param requestCode מספר
+     */
     public void checkPermission(String permission, int requestCode) {
         if (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED) {
 
@@ -108,6 +122,12 @@ public class MessagingActivity extends AppCompatActivity implements View.OnClick
         }
     }
 
+    /**
+     * מקבל את המספר של הבן אדם מאנשי הקשר ושם אותו בpnum
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

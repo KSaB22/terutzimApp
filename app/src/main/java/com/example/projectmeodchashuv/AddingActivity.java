@@ -44,7 +44,9 @@ public class AddingActivity extends AppCompatActivity implements View.OnClickLis
         lv = findViewById(R.id.lv);
         chooser = findViewById(R.id.btnch);
         chooser.setOnClickListener(this);
-
+        /**
+         * @param ISSET למקרה ובו מגיעים להוספת תירוץ ממקומות ששולחים עם קטגוריה שכבר נבחרה
+         */
         if(getIntent().getBooleanExtra("ISSET", false)){
             chooser.setVisibility(View.GONE);
             reason = getIntent().getStringExtra("CATEGORY");
