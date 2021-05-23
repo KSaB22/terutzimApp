@@ -81,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         lv.setAdapter(adapter);
         lv.setOnItemClickListener(this);
 
-
             Intent intent = new Intent(this, NotificationsService.class);
             startService(intent);
 
@@ -105,11 +104,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             finish();
                             if (sharedPref.LoadDarkModeState()) {
                                 sharedPref.setDarkModeState(false);
-                                LoadingActivity.first =true;
                                 restartapp();
                             } else {
                                 sharedPref.setDarkModeState(true);
-                                LoadingActivity.first =true;
                                 restartapp();
                             }
 

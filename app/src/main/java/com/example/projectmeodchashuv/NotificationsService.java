@@ -29,6 +29,7 @@ NotificationsService extends Service {
     DatabaseReference dbteruzRef;
     DatabaseReference dbuserRef;
     DatabaseReference dbrequstRef;
+    public static boolean first = true;
 
     public NotificationsService() {
     }
@@ -56,13 +57,14 @@ NotificationsService extends Service {
 
 
     @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(Intent intent, final int flags, int startId) {
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference dbRef = database.getReference("teruzim");
-
-        dbteruzRef = database.getReference("teruzim");
-        dbrequstRef = database.getReference("requests");
-        if(!LoadingActivity.first) {
+        if(first)
+            first = false;
+        else{
+            dbteruzRef = database.getReference("teruzim");
+            dbrequstRef = database.getReference("requests");
             /**
              * בודקת אם נוצר תירוץ חדש ואם הוא לא נוצר על הטלפון הזה היא שולחת התראה על זה
              */
@@ -78,13 +80,13 @@ NotificationsService extends Service {
                     }
                     SharedPref.writeListInPref(getApplicationContext(), temp);
 
-                    boolean flag = true;
-                    for (int i = 0; i < MainActivity.teruzimOnThisDevice.size() && flag; i++) {
+                    double flag = 1;
+                    for (int i = 0; i < MainActivity.teruzimOnThisDevice.size(); i++) {
                         if (newTeruz.get(i).getTluna().equals(MainActivity.teruzimOnThisDevice.get(i).getTluna())) {
-                            flag = false;
+                            flag = flag - (1/MainActivity.teruzimOnThisDevice.size());
                         }
                     }
-                    if (flag) {
+                    if (flag != 0) {
                         int NOTIFICATION_ID = 234;
                         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                         String CHANNEL_ID = "Terutz";
@@ -132,13 +134,13 @@ NotificationsService extends Service {
                     GenericTypeIndicator<ArrayList<Request>> r = new GenericTypeIndicator<ArrayList<Request>>() {
                     };
                     ArrayList<Request> newRequest = snapshot.getValue(r);
-                    boolean requestflag = true;
-                    for (int i = 0; i < MainActivity.requestsOnThisDevice.size() && requestflag; i++) {
+                    double requestflag = 1;
+                    for (int i = 0; i < MainActivity.requestsOnThisDevice.size(); i++) {
                         if (newRequest.get(i).getLog().equals(MainActivity.requestsOnThisDevice.get(i).getLog())) {
-                            requestflag = false;
+                            requestflag = requestflag - (1/MainActivity.requestsOnThisDevice.size()) ;
                         }
                     }
-                    if (requestflag) {
+                    if (requestflag != 0) {
                         int NOTIFICATION_ID = 234;
                         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
                         String CHANNEL_ID = "Terutz";
@@ -177,9 +179,9 @@ NotificationsService extends Service {
 
                 }
             });
+
+
         }
-        else
-            LoadingActivity.first = false;
 
         return super.onStartCommand(intent, flags, startId);
     }
